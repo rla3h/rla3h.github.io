@@ -4,38 +4,56 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>수능 D-day · 디데이 계산기 (날짜 계산, 며칠 남았는지) | 스쿨킷</title>
-  <meta name="description" content="수능, 시험, 기념일까지 며칠 남았는지 계산하는 디데이 계산기. 두 날짜 사이 일수와 N일 후 날짜도 계산합니다." />
+  <meta name="description" content="수능, 시험, 기념일까지 며칠 남았는지 실시간 카운트다운으로 보여주는 디데이 계산기. 여러 디데이 저장, 두 날짜 사이 일수, N일 후 날짜도 계산합니다." />
   <link rel="canonical" href="https://rla3h.github.io/tools/dday.html" />
   <meta property="og:title" content="수능 D-day · 디데이 계산기" />
-  <meta property="og:description" content="수능·시험·기념일까지 남은 날 계산" />
+  <meta property="og:description" content="수능·시험·기념일까지 남은 날 실시간 카운트다운" />
   <meta property="og:site_name" content="스쿨킷" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://rla3h.github.io/tools/dday.html" />
+  <meta name="theme-color" content="#4c5cf5" />
   <link rel="stylesheet" href="assets/style.css" />
   <script src="assets/config.js"></script>
   <script src="assets/common.js"></script>
 </head>
 <body>
 <div class="wrap">
-  <header class="top"><a class="home" href="./">🎒 스쿨킷</a></header>
+  <span class="eyebrow">📅 디데이</span>
   <h1>디데이 계산기</h1>
-  <p class="lead">목표 날짜까지 남은 날, 두 날짜 사이 일수, N일 후 날짜를 계산합니다.</p>
+  <p class="lead">목표 날짜까지 남은 시간을 실시간으로 보여주고, 여러 디데이를 저장해 둘 수 있어요.</p>
 
   <div class="card">
     <label for="target">목표 날짜</label>
     <input id="target" type="date" />
     <div class="row">
-      <button class="ghost" data-preset="suneung">2027학년도 수능 (2026.11.19)</button>
+      <button class="chip ghost" data-preset="2026-11-19" data-name="2027학년도 수능">🎓 2027 수능 (2026.11.19)</button>
     </div>
     <div class="big" id="dday">-</div>
-    <p class="lead" style="text-align:center" id="ddayInfo"></p>
-    <p class="lead" style="font-size:.85rem;text-align:center">수능 날짜는 교육부 발표 기준 예정일이며 변경될 수 있습니다.</p>
+    <p class="center small" id="ddayInfo" style="margin:0"></p>
+    <div class="countdown" id="cd">
+      <div><b id="cdD">0</b><span>일</span></div>
+      <div><b id="cdH">00</b><span>시간</span></div>
+      <div><b id="cdM">00</b><span>분</span></div>
+      <div><b id="cdS">00</b><span>초</span></div>
+    </div>
+    <p class="center small" style="margin:6px 0 0">수능 날짜는 교육부 발표 기준 예정일이며 변경될 수 있습니다.</p>
+  </div>
+
+  <div class="card reveal">
+    <h2>📌 내 디데이 목록</h2>
+    <div class="row" style="margin-top:0">
+      <input id="newName" placeholder="이름 (예: 기말고사)" style="flex:2;min-width:140px" />
+      <input id="newDate" type="date" style="flex:1;min-width:140px" />
+      <button id="add">추가</button>
+    </div>
+    <table style="margin-top:12px"><tbody id="list"></tbody></table>
+    <p class="small" id="empty" style="text-align:center;margin:12px 0 0">아직 저장한 디데이가 없어요.</p>
   </div>
 
   <div class="ad-slot" hidden></div>
 
-  <div class="card">
-    <h2 style="margin-top:0;font-size:1.1rem">두 날짜 사이 일수</h2>
+  <div class="card reveal">
+    <h2>두 날짜 사이 일수</h2>
     <div class="grid">
       <div><label for="from">시작일</label><input id="from" type="date" /></div>
       <div><label for="to">종료일</label><input id="to" type="date" /></div>
@@ -43,8 +61,8 @@
     <p class="big" id="between" style="font-size:1.8rem">-</p>
   </div>
 
-  <div class="card">
-    <h2 style="margin-top:0;font-size:1.1rem">N일 후 날짜</h2>
+  <div class="card reveal">
+    <h2>N일 후 날짜</h2>
     <div class="grid">
       <div><label for="base">기준일</label><input id="base" type="date" /></div>
       <div><label for="n">더할 일수 (음수 가능)</label><input id="n" type="number" value="100" /></div>
@@ -53,7 +71,6 @@
   </div>
 
   <div class="support" hidden></div>
-  <footer class="bottom"><a href="./">다른 도구 보기</a></footer>
 </div>
 <script>
   var DAY = 86400000, WD = ["일", "월", "화", "수", "목", "금", "토"];
@@ -61,16 +78,59 @@
   function today() { var d = new Date(); return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()); }
   function fmt(ms) { var d = new Date(ms); return d.getUTCFullYear() + "." + (d.getUTCMonth() + 1) + "." + d.getUTCDate() + " (" + WD[d.getUTCDay()] + ")"; }
   function iso(ms) { return new Date(ms).toISOString().slice(0, 10); }
+  function label(diff) { return diff > 0 ? "D-" + diff : diff === 0 ? "D-Day" : "D+" + (-diff); }
   function $(id) { return document.getElementById(id); }
+  function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
+  var lastDiff = null;
   function updateDday() {
     var t = parse($("target").value);
     if (t === null) { $("dday").textContent = "-"; $("ddayInfo").textContent = ""; return; }
     var diff = Math.round((t - today()) / DAY);
-    $("dday").textContent = diff > 0 ? "D-" + diff : diff === 0 ? "D-Day" : "D+" + (-diff);
+    $("dday").textContent = label(diff);
+    if (diff !== lastDiff) { SK.pop($("dday")); lastDiff = diff; }
     $("ddayInfo").textContent = fmt(t) + (diff > 0 ? " · 약 " + (diff / 7).toFixed(1) + "주 남음" : "");
-    try { localStorage.setItem("dday-target", $("target").value); } catch (e) {}
+    SK.store.set("dday-target", $("target").value);
+    updateCountdown();
   }
+  var prev = {};
+  function setCd(id, v) {
+    var el = $(id);
+    if (prev[id] !== v) { el.textContent = v; el.classList.remove("tick"); void el.offsetWidth; el.classList.add("tick"); prev[id] = v; }
+  }
+  function updateCountdown() {
+    var v = $("target").value;
+    if (!v) return;
+    var p = v.split("-"), end = new Date(+p[0], p[1] - 1, +p[2]).getTime();
+    var ms = Math.max(0, end - Date.now()), s = Math.floor(ms / 1000);
+    setCd("cdD", String(Math.floor(s / 86400)));
+    setCd("cdH", String(Math.floor(s % 86400 / 3600)).padStart(2, "0"));
+    setCd("cdM", String(Math.floor(s % 3600 / 60)).padStart(2, "0"));
+    setCd("cdS", String(s % 60).padStart(2, "0"));
+  }
+
+  // 저장 목록
+  function getList() { try { return JSON.parse(SK.store.get("dday-list", "[]")) || []; } catch (e) { return []; } }
+  function saveList(l) { SK.store.set("dday-list", JSON.stringify(l)); renderList(); }
+  function renderList() {
+    var l = getList().sort(function (a, b) { return a.d < b.d ? -1 : 1; }), tb = $("list");
+    tb.innerHTML = l.map(function (it, i) {
+      var diff = Math.round((parse(it.d) - today()) / DAY);
+      return '<tr class="reveal in"><td style="text-align:left;font-weight:700">' + esc(it.n) + '</td><td class="small">' + fmt(parse(it.d)) +
+        '</td><td style="font-weight:800;color:var(--accent)">' + label(diff) + '</td><td><button class="chip ghost" data-show="' + it.d +
+        '">보기</button> <button class="chip ghost" data-del="' + i + '" aria-label="삭제">✕</button></td></tr>';
+    }).join("");
+    $("empty").hidden = l.length > 0;
+    tb.querySelectorAll("[data-del]").forEach(function (b) { b.onclick = function () { var x = getList().sort(function (a, b) { return a.d < b.d ? -1 : 1; }); x.splice(+b.dataset.del, 1); saveList(x); }; });
+    tb.querySelectorAll("[data-show]").forEach(function (b) { b.onclick = function () { $("target").value = b.dataset.show; updateDday(); window.scrollTo({ top: 0, behavior: "smooth" }); }; });
+  }
+  $("add").onclick = function () {
+    var n = $("newName").value.trim(), d = $("newDate").value;
+    if (!n || !d) { SK.toast("이름과 날짜를 입력하세요"); return; }
+    var l = getList(); l.push({ n: n.slice(0, 40), d: d }); saveList(l);
+    $("newName").value = ""; SK.toast("📌 " + n + " 저장했어요");
+  };
+
   function updateBetween() {
     var a = parse($("from").value), b = parse($("to").value);
     $("between").textContent = a === null || b === null ? "-" : Math.round((b - a) / DAY) + "일 (당일 포함 " + (Math.abs(Math.round((b - a) / DAY)) + 1) + "일)";
@@ -80,15 +140,14 @@
     $("after").textContent = a === null || isNaN(n) ? "-" : fmt(a + n * DAY);
   }
 
-  var saved = null;
-  try { saved = localStorage.getItem("dday-target"); } catch (e) {}
-  $("target").value = saved || "2026-11-19";
-  $("from").value = $("base").value = $("to").value = iso(today());
-  document.querySelector("[data-preset=suneung]").onclick = function () { $("target").value = "2026-11-19"; updateDday(); };
+  $("target").value = SK.store.get("dday-target", "2026-11-19");
+  $("from").value = $("base").value = $("to").value = $("newDate").value = iso(today());
+  document.querySelector("[data-preset]").onclick = function () { $("target").value = this.dataset.preset; updateDday(); };
   $("target").addEventListener("input", updateDday);
   ["from", "to"].forEach(function (id) { $(id).addEventListener("input", updateBetween); });
   ["base", "n"].forEach(function (id) { $(id).addEventListener("input", updateAfter); });
-  updateDday(); updateBetween(); updateAfter();
+  updateDday(); updateBetween(); updateAfter(); renderList();
+  setInterval(function () { updateCountdown(); var d = Math.round((parse($("target").value) - today()) / DAY); if (d !== lastDiff) updateDday(); }, 1000);
 </script>
 </body>
 </html>
