@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rla3h.github.io/sitemap.xml
