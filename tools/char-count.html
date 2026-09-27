@@ -4,13 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>글자수 세기 · 생기부 바이트 계산기 (공백 포함/제외, NEIS 기준) | 스쿨킷</title>
-  <meta name="description" content="자기소개서·생활기록부(생기부) 세특 글자수와 NEIS 바이트를 실시간으로 계산합니다. 공백 포함/제외 글자수, 단어 수, 줄 수, 바이트를 한 번에 확인하세요. 무료·설치 없음." />
+  <meta name="description" content="자기소개서·생활기록부(생기부) 세특 글자수와 NEIS 바이트를 실시간으로 계산합니다. 공백 포함/제외 글자수, 단어 수, 문장 수, 원고지 매수, 바이트를 한 번에 확인하세요. 무료·설치 없음." />
   <link rel="canonical" href="https://rla3h.github.io/tools/char-count.html" />
   <meta property="og:title" content="글자수 세기 · 생기부 바이트 계산기" />
   <meta property="og:description" content="공백 포함/제외 글자수와 NEIS 바이트를 실시간으로 계산" />
   <meta property="og:site_name" content="스쿨킷" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://rla3h.github.io/tools/char-count.html" />
+  <meta name="theme-color" content="#4c5cf5" />
   <link rel="stylesheet" href="assets/style.css" />
   <script src="assets/config.js"></script>
   <script src="assets/common.js"></script>
@@ -20,28 +21,37 @@
 </head>
 <body>
 <div class="wrap">
-  <header class="top"><a class="home" href="./">🎒 스쿨킷</a></header>
+  <span class="eyebrow">✍️ 글자수 · 바이트</span>
   <h1>글자수 세기 · 생기부 바이트 계산기</h1>
-  <p class="lead">입력하는 즉시 공백 포함/제외 글자수와 NEIS 바이트가 계산됩니다. 입력한 글은 서버로 전송되지 않습니다.</p>
+  <p class="lead">입력하는 즉시 공백 포함/제외 글자수와 NEIS 바이트가 계산됩니다. 입력한 글은 서버로 전송되지 않아요.</p>
 
   <div class="card">
     <textarea id="text" placeholder="여기에 자기소개서, 세특, 과제 글을 붙여넣으세요."></textarea>
+
     <div class="row">
-      <label style="margin:0;flex:1;font-weight:500">목표 바이트
-        <input id="limit" type="number" min="0" value="1500" inputmode="numeric" />
-      </label>
+      <span class="small">목표</span>
+      <button class="chip ghost" data-limit="1500">500자 (1500B)</button>
+      <button class="chip ghost" data-limit="900">300자 (900B)</button>
+      <button class="chip ghost" data-limit="1000">자소서 1000자</button>
+      <input id="limit" type="number" min="0" value="1500" inputmode="numeric" style="width:110px;padding:6px 10px" aria-label="목표 바이트" />
     </div>
-    <div class="grid" style="margin-top:12px">
+    <div class="bar" id="bar"><i></i></div>
+    <p class="small" id="barText" style="margin:6px 0 0"></p>
+
+    <div class="grid" style="margin-top:14px">
       <div class="stat"><b id="withSpace">0</b><span>공백 포함 글자수</span></div>
       <div class="stat"><b id="noSpace">0</b><span>공백 제외 글자수</span></div>
       <div class="stat"><b id="bytes">0</b><span>NEIS 바이트</span></div>
-      <div class="stat"><b id="remain">1500</b><span>남은 바이트</span></div>
+      <div class="stat"><b id="remain">1,500</b><span>남은 양</span></div>
       <div class="stat"><b id="words">0</b><span>단어 수</span></div>
+      <div class="stat"><b id="sentences">0</b><span>문장 수</span></div>
       <div class="stat"><b id="lines">0</b><span>줄 수</span></div>
+      <div class="stat"><b id="paper">0</b><span>원고지(200자) 매수</span></div>
     </div>
     <div class="row">
-      <button id="copy">복사</button>
+      <button id="copy">📋 복사</button>
       <button class="ghost" id="trim">연속 공백 정리</button>
+      <button class="ghost" id="oneline">줄바꿈 없애기</button>
       <button class="ghost" id="clear">지우기</button>
     </div>
   </div>
@@ -49,20 +59,17 @@
   <div class="ad-slot" hidden></div>
   <div class="support" hidden></div>
 
-  <section class="card faq">
+  <section class="card faq reveal">
     <h2>자주 묻는 질문</h2>
-    <h3>NEIS 바이트는 어떻게 계산하나요?</h3>
-    <p>나이스(NEIS) 기준으로 한글 1자는 3바이트, 영문·숫자·공백·특수문자는 1바이트, 줄바꿈(엔터)은 2바이트로 계산합니다. 학교 입력 규정이 다를 수 있으니 최종 입력 전 확인하세요.</p>
-    <h3>세특은 몇 바이트까지 쓸 수 있나요?</h3>
-    <p>과목별 세부능력 및 특기사항은 일반적으로 500자(1,500바이트) 이내입니다. 항목마다 다르니 위의 ‘목표 바이트’를 바꿔서 사용하세요.</p>
-    <h3>자기소개서 글자수는 공백 포함인가요?</h3>
-    <p>대부분의 대학·기업은 공백 포함 글자수를 기준으로 합니다. 모집 요강을 확인하세요.</p>
+    <details open><summary>NEIS 바이트는 어떻게 계산하나요?</summary><p>나이스(NEIS) 기준으로 한글 1자는 3바이트, 영문·숫자·공백·특수문자는 1바이트, 줄바꿈(엔터)은 2바이트로 계산합니다. 학교 입력 규정이 다를 수 있으니 최종 입력 전 확인하세요.</p></details>
+    <details><summary>세특은 몇 바이트까지 쓸 수 있나요?</summary><p>과목별 세부능력 및 특기사항은 일반적으로 500자(1,500바이트) 이내입니다. 항목마다 다르니 위의 목표 버튼이나 입력칸으로 바꿔서 사용하세요.</p></details>
+    <details><summary>자기소개서 글자수는 공백 포함인가요?</summary><p>대부분의 대학·기업은 공백 포함 글자수를 기준으로 합니다. 목표를 1000자처럼 ‘자’ 단위로 고르면 공백 포함 글자수 기준으로 진행 바가 표시돼요.</p></details>
+    <details><summary>‘줄바꿈 없애기’는 언제 쓰나요?</summary><p>NEIS는 줄바꿈 1개를 2바이트로 계산합니다. 문단 구분이 필요 없는 항목이라면 줄바꿈을 없애서 바이트를 아낄 수 있어요.</p></details>
   </section>
-
-  <footer class="bottom"><a href="./">다른 도구 보기</a></footer>
 </div>
 <script>
   var t = document.getElementById("text"), lim = document.getElementById("limit");
+  var mode = SK.store.get("cc-mode", "byte"); // byte | char
   function neisBytes(s) {
     var b = 0;
     for (var i = 0; i < s.length; i++) {
@@ -74,24 +81,44 @@
     }
     return b;
   }
+  function $(id) { return document.getElementById(id); }
   function update() {
     var s = t.value, b = neisBytes(s), max = parseInt(lim.value, 10) || 0;
-    document.getElementById("withSpace").textContent = Array.from(s.replace(/\r?\n/g, "")).length.toLocaleString();
-    document.getElementById("noSpace").textContent = Array.from(s.replace(/\s/g, "")).length.toLocaleString();
-    document.getElementById("bytes").textContent = b.toLocaleString();
-    var r = document.getElementById("remain");
-    r.textContent = (max - b).toLocaleString();
-    r.style.color = max - b < 0 ? "#e03131" : "";
-    document.getElementById("words").textContent = (s.trim() ? s.trim().split(/\s+/).length : 0).toLocaleString();
-    document.getElementById("lines").textContent = (s ? s.split(/\n/).length : 0).toLocaleString();
-    try { localStorage.setItem("cc-text", s); } catch (e) {}
+    var chars = Array.from(s.replace(/\r?\n/g, "")).length;
+    var used = mode === "char" ? chars : b, unit = mode === "char" ? "자" : "B";
+    SK.countUp($("withSpace"), chars);
+    SK.countUp($("noSpace"), Array.from(s.replace(/\s/g, "")).length);
+    SK.countUp($("bytes"), b);
+    SK.countUp($("remain"), max - used, { suffix: unit });
+    $("remain").style.color = max - used < 0 ? "var(--bad)" : "";
+    SK.countUp($("words"), s.trim() ? s.trim().split(/\s+/).length : 0);
+    SK.countUp($("sentences"), (s.match(/[^.!?。\n]+[.!?。]+/g) || []).length);
+    SK.countUp($("lines"), s ? s.split(/\n/).length : 0);
+    SK.countUp($("paper"), chars / 200, { decimals: 1 });
+    var pct = max ? used / max * 100 : 0;
+    $("bar").classList.toggle("over", pct > 100);
+    $("bar").firstElementChild.style.width = Math.min(100, pct) + "%";
+    $("barText").textContent = max ? used.toLocaleString() + unit + " / " + max.toLocaleString() + unit + " (" + pct.toFixed(0) + "%)" + (pct > 100 ? " · 초과했어요!" : "") : "";
+    SK.store.set("cc-text", s);
   }
-  try { t.value = localStorage.getItem("cc-text") || ""; } catch (e) {}
+  t.value = SK.store.get("cc-text", "");
+  lim.value = SK.store.get("cc-limit", "1500");
   t.addEventListener("input", update);
-  lim.addEventListener("input", update);
-  document.getElementById("copy").onclick = function () { navigator.clipboard && navigator.clipboard.writeText(t.value); };
-  document.getElementById("trim").onclick = function () { t.value = t.value.replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim(); update(); };
-  document.getElementById("clear").onclick = function () { t.value = ""; update(); };
+  lim.addEventListener("input", function () { mode = "byte"; SK.store.set("cc-mode", mode); SK.store.set("cc-limit", lim.value); update(); });
+  document.querySelectorAll("[data-limit]").forEach(function (btn) {
+    btn.onclick = function () {
+      lim.value = btn.dataset.limit;
+      mode = /자소서/.test(btn.textContent) ? "char" : "byte";
+      SK.store.set("cc-mode", mode); SK.store.set("cc-limit", lim.value);
+      update(); SK.toast("목표: " + btn.textContent);
+    };
+  });
+  $("copy").onclick = function () {
+    if (navigator.clipboard) navigator.clipboard.writeText(t.value).then(function () { SK.toast("📋 복사했어요"); }, function () { SK.toast("복사에 실패했어요"); });
+  };
+  $("trim").onclick = function () { t.value = t.value.replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim(); update(); SK.toast("공백을 정리했어요"); };
+  $("oneline").onclick = function () { t.value = t.value.replace(/\s*\r?\n\s*/g, " ").trim(); update(); SK.toast("줄바꿈을 없앴어요"); };
+  $("clear").onclick = function () { if (!t.value || confirm("입력한 글을 모두 지울까요?")) { t.value = ""; update(); } };
   update();
 </script>
 </body>

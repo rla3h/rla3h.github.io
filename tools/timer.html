@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>뽀모도로 공부 타이머 · 25분 집중 5분 휴식 (온라인 스터디 타이머) | 스쿨킷</title>
+  <meta name="description" content="설치 없이 바로 쓰는 뽀모도로 공부 타이머. 25분 집중·5분 휴식, 50분·10분 모드와 직접 설정을 지원하고 오늘 공부한 시간을 자동으로 기록합니다." />
+  <link rel="canonical" href="https://rla3h.github.io/tools/timer.html" />
+  <meta property="og:title" content="뽀모도로 공부 타이머" />
+  <meta property="og:description" content="25분 집중 + 5분 휴식, 오늘 공부 시간 자동 기록" />
+  <meta property="og:site_name" content="스쿨킷" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rla3h.github.io/tools/timer.html" />
+  <meta name="theme-color" content="#4c5cf5" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script src="assets/config.js"></script>
+  <script src="assets/common.js"></script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"뽀모도로 공부 타이머 | 스쿨킷","url":"https://rla3h.github.io/tools/timer.html","applicationCategory":"EducationalApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"}}
+  </script>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">⏱️ 공부 타이머</span>
+  <h1>뽀모도로 공부 타이머</h1>
+  <p class="lead">집중과 휴식을 번갈아 반복하면 오래 공부해도 덜 지쳐요. 오늘 공부한 시간이 자동으로 쌓입니다.</p>
+
+  <div class="card">
+    <div class="row" style="margin-top:0;justify-content:center" id="presets">
+      <button class="chip ghost" data-f="25" data-b="5">25분 · 5분</button>
+      <button class="chip ghost" data-f="50" data-b="10">50분 · 10분</button>
+      <button class="chip ghost" data-f="90" data-b="15">90분 · 15분</button>
+      <button class="chip ghost" id="customBtn">직접 설정</button>
+    </div>
+    <div class="row" id="customRow" hidden style="justify-content:center">
+      <label style="margin:0;display:flex;gap:6px;align-items:center">집중 <input id="cf" type="number" min="1" max="180" value="30" style="width:80px;padding:6px 10px" />분</label>
+      <label style="margin:0;display:flex;gap:6px;align-items:center">휴식 <input id="cb" type="number" min="1" max="60" value="5" style="width:80px;padding:6px 10px" />분</label>
+      <button class="chip" id="applyCustom">적용</button>
+    </div>
+
+    <div class="timer-ring" id="ring">
+      <svg viewBox="0 0 300 300" aria-hidden="true">
+        <defs><linearGradient id="tg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="var(--accent)" /><stop offset="1" stop-color="var(--accent-2)" /></linearGradient></defs>
+        <circle class="track" cx="150" cy="150" r="136" fill="none" stroke-width="14" />
+        <circle class="prog" id="prog" cx="150" cy="150" r="136" fill="none" stroke-width="14" stroke-dasharray="854.5" stroke-dashoffset="0" />
+      </svg>
+      <div class="inner"><div>
+        <div class="mode" id="mode">🔥 집중</div>
+        <div class="time" id="time">25:00</div>
+        <div class="dots" id="dots"><i></i><i></i><i></i><i></i></div>
+      </div></div>
+    </div>
+
+    <div class="row" style="justify-content:center">
+      <button id="start" style="min-width:120px">▶ 시작</button>
+      <button class="ghost" id="skip">⏭ 건너뛰기</button>
+      <button class="ghost" id="reset">↺ 초기화</button>
+    </div>
+    <div class="row" style="justify-content:center">
+      <label class="small" style="margin:0;display:flex;gap:6px;align-items:center;font-weight:500"><input type="checkbox" id="sound" checked style="width:auto" /> 끝나면 알림음</label>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="stat"><b id="today">0분</b><span>오늘 집중한 시간</span></div>
+    <div class="stat"><b id="sessions">0</b><span>오늘 완료한 뽀모도로</span></div>
+    <div class="stat"><b id="streak">0일</b><span>연속 공부한 날</span></div>
+  </div>
+
+  <div class="ad-slot" hidden></div>
+  <div class="support" hidden></div>
+
+  <section class="card faq reveal" style="margin-top:16px">
+    <h2>자주 묻는 질문</h2>
+    <details open><summary>뽀모도로 공부법이 뭔가요?</summary><p>25분 동안 한 가지에 집중하고 5분 쉬는 것을 반복하는 시간 관리법입니다. 4번 반복한 뒤에는 15~30분 길게 쉬어요. 스쿨킷 타이머는 4번째 휴식을 자동으로 3배 길게 잡아줍니다.</p></details>
+    <details><summary>다른 탭으로 가도 타이머가 돌아가나요?</summary><p>네. 종료 시각을 기준으로 계산하기 때문에 다른 탭을 보거나 화면이 꺼져도 정확하게 흘러갑니다. 탭 제목에 남은 시간이 표시돼요.</p></details>
+    <details><summary>공부 기록은 어디에 저장되나요?</summary><p>이 기기의 브라우저에만 저장되며 서버로 전송되지 않습니다.</p></details>
+  </section>
+</div>
+<script>
+  function $(id) { return document.getElementById(id); }
+  var C = 854.5, baseTitle = document.title;
+  var cfg = JSON.parse(SK.store.get("tm-cfg", '{"f":25,"b":5}'));
+  var st = { mode: "focus", left: cfg.f * 60, total: cfg.f * 60, endAt: null, round: 0 };
+  var tick = null;
+
+  function dayKey(d) { d = d || new Date(); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); }
+  function log() { try { return JSON.parse(SK.store.get("tm-log", "{}")) || {}; } catch (e) { return {}; } }
+  function addLog(min, sess) {
+    var l = log(), k = dayKey(), e = l[k] || { m: 0, s: 0 };
+    e.m += min; e.s += sess; l[k] = e;
+    SK.store.set("tm-log", JSON.stringify(l));
+    paintStats();
+  }
+  function paintStats() {
+    var l = log(), e = l[dayKey()] || { m: 0, s: 0 };
+    var h = Math.floor(e.m / 60), m = Math.round(e.m % 60);
+    $("today").textContent = h ? h + "시간 " + m + "분" : m + "분";
+    SK.countUp($("sessions"), e.s);
+    var streak = 0, d = new Date();
+    if (!l[dayKey(d)]) d.setDate(d.getDate() - 1);
+    while (l[dayKey(d)] && l[dayKey(d)].m > 0) { streak++; d.setDate(d.getDate() - 1); }
+    $("streak").textContent = streak + "일";
+  }
+  function fmt(s) { s = Math.max(0, Math.ceil(s)); return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); }
+  function paint() {
+    $("time").textContent = fmt(st.left);
+    $("prog").style.strokeDashoffset = C * (1 - st.left / st.total);
+    var brk = st.mode === "break";
+    $("ring").classList.toggle("break", brk);
+    $("ring").classList.toggle("running", !!st.endAt);
+    $("mode").textContent = brk ? (st.long ? "🌿 긴 휴식" : "☕ 휴식") : "🔥 집중";
+    document.querySelectorAll("#dots i").forEach(function (el, i) { el.classList.toggle("done", i < st.round % 4 || (st.round > 0 && st.round % 4 === 0 && brk)); });
+    $("start").textContent = st.endAt ? "⏸ 일시정지" : (st.left < st.total ? "▶ 계속" : "▶ 시작");
+    document.title = st.endAt ? fmt(st.left) + " " + (brk ? "휴식" : "집중") + " · 스쿨킷" : baseTitle;
+  }
+  function beep() {
+    if (!$("sound").checked) return;
+    try {
+      var ac = new (window.AudioContext || window.webkitAudioContext)();
+      [0, .25, .5].forEach(function (t, i) {
+        var o = ac.createOscillator(), g = ac.createGain();
+        o.frequency.value = i === 2 ? 1046 : 784; o.connect(g); g.connect(ac.destination);
+        g.gain.setValueAtTime(.0001, ac.currentTime + t);
+        g.gain.exponentialRampToValueAtTime(.3, ac.currentTime + t + .02);
+        g.gain.exponentialRampToValueAtTime(.0001, ac.currentTime + t + .22);
+        o.start(ac.currentTime + t); o.stop(ac.currentTime + t + .25);
+      });
+    } catch (e) {}
+  }
+  function setMode(mode) {
+    st.mode = mode;
+    st.long = mode === "break" && st.round > 0 && st.round % 4 === 0;
+    st.total = st.left = (mode === "focus" ? cfg.f : cfg.b * (st.long ? 3 : 1)) * 60;
+  }
+  function finish(counted) {
+    stop();
+    if (st.mode === "focus") {
+      if (counted) { st.round++; addLog(cfg.f, 1); }
+      setMode("break");
+      SK.toast(counted ? "🎉 집중 완료! 잠깐 쉬어요" : "휴식으로 넘어갔어요");
+    } else {
+      setMode("focus");
+      SK.toast("💪 다시 집중할 시간!");
+    }
+    if (counted) beep();
+    paint();
+  }
+  function loop() {
+    st.left = (st.endAt - Date.now()) / 1000;
+    if (st.left <= 0) { st.left = 0; finish(true); return; }
+    paint();
+  }
+  function start() { st.endAt = Date.now() + st.left * 1000; tick = setInterval(loop, 250); paint(); }
+  function stop() { if (st.endAt) st.left = Math.max(0, (st.endAt - Date.now()) / 1000); st.endAt = null; clearInterval(tick); paint(); }
+
+  $("start").onclick = function () { st.endAt ? stop() : start(); };
+  $("skip").onclick = function () {
+    // 건너뛴 집중 시간 중 실제로 흐른 만큼은 기록
+    if (st.mode === "focus") { var el = (st.total - (st.endAt ? (st.endAt - Date.now()) / 1000 : st.left)) / 60; if (el >= 1) addLog(Math.floor(el), 0); }
+    finish(false);
+  };
+  $("reset").onclick = function () { stop(); st.round = 0; setMode("focus"); paint(); };
+
+  function applyCfg(f, b, btn) {
+    cfg = { f: f, b: b };
+    SK.store.set("tm-cfg", JSON.stringify(cfg));
+    document.querySelectorAll("#presets .chip").forEach(function (x) { x.classList.toggle("ghost", x !== btn); });
+    stop(); setMode("focus"); paint();
+  }
+  document.querySelectorAll("#presets [data-f]").forEach(function (btn) {
+    btn.onclick = function () { $("customRow").hidden = true; applyCfg(+btn.dataset.f, +btn.dataset.b, btn); };
+    if (+btn.dataset.f === cfg.f && +btn.dataset.b === cfg.b) document.querySelectorAll("#presets .chip").forEach(function (x) { x.classList.toggle("ghost", x !== btn); });
+  });
+  $("customBtn").onclick = function () { $("customRow").hidden = !$("customRow").hidden; };
+  $("applyCustom").onclick = function () {
+    var f = Math.min(180, Math.max(1, parseInt($("cf").value, 10) || 25)), b = Math.min(60, Math.max(1, parseInt($("cb").value, 10) || 5));
+    applyCfg(f, b, $("customBtn")); SK.toast("집중 " + f + "분 · 휴식 " + b + "분");
+  };
+  if (!document.querySelector("#presets .chip:not(.ghost)")) document.querySelectorAll("#presets .chip").forEach(function (x) { x.classList.toggle("ghost", x.id !== "customBtn"); });
+  document.addEventListener("keydown", function (e) { if (e.code === "Space" && e.target === document.body) { e.preventDefault(); $("start").click(); } });
+
+  paint(); paintStats();
+</script>
+</body>
+</html>

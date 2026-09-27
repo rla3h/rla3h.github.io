@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>성적 위치 계산기 · 표준편차로 상위 몇 % 인지 계산 (원점수·평균·Z점수) | 스쿨킷</title>
+  <meta name="description" content="성적표의 원점수, 과목평균, 표준편차만 입력하면 Z점수, 상위 몇 %인지, 예상 석차와 5등급제·9등급제 예상 등급을 정규분포 그래프로 보여줍니다." />
+  <link rel="canonical" href="https://rla3h.github.io/tools/score.html" />
+  <meta property="og:title" content="성적 위치 계산기 (원점수·평균·표준편차)" />
+  <meta property="og:description" content="표준편차로 내 성적이 상위 몇 %인지, 예상 등급까지" />
+  <meta property="og:site_name" content="스쿨킷" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rla3h.github.io/tools/score.html" />
+  <meta name="theme-color" content="#4c5cf5" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script src="assets/config.js"></script>
+  <script src="assets/common.js"></script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"성적 위치 계산기 | 스쿨킷","url":"https://rla3h.github.io/tools/score.html","applicationCategory":"EducationalApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"}}
+  </script>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">📊 성적 위치</span>
+  <h1>성적 위치 계산기</h1>
+  <p class="lead">성적표의 원점수·과목평균·표준편차로 내가 상위 몇 %인지 추정합니다.</p>
+
+  <div class="card">
+    <div class="grid">
+      <div><label for="score">내 원점수</label><input id="score" type="number" step="0.1" value="85" inputmode="decimal" /></div>
+      <div><label for="mean">과목 평균</label><input id="mean" type="number" step="0.1" value="68.5" inputmode="decimal" /></div>
+      <div><label for="sd">표준편차</label><input id="sd" type="number" step="0.1" min="0" value="15.2" inputmode="decimal" /></div>
+      <div><label for="n">수강자 수 (선택)</label><input id="n" type="number" min="1" value="200" inputmode="numeric" /></div>
+    </div>
+
+    <div class="big" id="top">-</div>
+    <p class="center small" id="sub" style="margin:0 0 8px"></p>
+
+    <svg class="curve" viewBox="0 0 600 230" aria-hidden="true">
+      <defs><clipPath id="clipR"><rect id="clipRect" x="0" y="0" width="600" height="230" style="transition:transform .8s cubic-bezier(.2,.8,.2,1)" /></clipPath></defs>
+      <path class="area" id="area" />
+      <path class="shade" id="shade" clip-path="url(#clipR)" />
+      <path class="line" id="line" />
+      <line class="axis" x1="20" y1="190" x2="580" y2="190" />
+      <g id="ticks"></g>
+      <g class="mv" id="mv">
+        <line class="marker" x1="0" y1="24" x2="0" y2="190" />
+        <circle class="dot" cx="0" cy="190" r="6" />
+        <text id="mvText" x="0" y="16" text-anchor="middle" style="fill:var(--accent-3);font-weight:800;font-size:13px">나</text>
+      </g>
+    </svg>
+
+    <div class="grid" style="margin-top:8px">
+      <div class="stat"><b id="z">-</b><span>Z점수</span></div>
+      <div class="stat"><b id="rank">-</b><span>예상 석차</span></div>
+      <div class="stat"><b id="g5">-</b><span>예상 등급 (5등급제)</span></div>
+      <div class="stat"><b id="g9">-</b><span>예상 등급 (9등급제)</span></div>
+    </div>
+  </div>
+
+  <div class="ad-slot" hidden></div>
+  <div class="support" hidden></div>
+
+  <section class="card faq reveal">
+    <h2>자주 묻는 질문</h2>
+    <details open><summary>어떻게 계산하나요?</summary><p>점수가 정규분포를 따른다고 가정하고 Z점수 = (원점수 − 평균) ÷ 표준편차를 구한 뒤, 정규분포표로 상위 비율을 계산합니다.</p></details>
+    <details><summary>실제 등급과 다를 수 있나요?</summary><p>네. 시험이 너무 쉽거나 어려우면 점수 분포가 정규분포와 달라져 오차가 커집니다. 실제 등급은 석차로 정해지므로 참고용으로만 사용하고, 석차를 알면 <a href="grade.html">내신 등급 계산기</a>를 이용하세요.</p></details>
+    <details><summary>표준편차가 크면 좋은 건가요?</summary><p>표준편차가 크면 점수가 넓게 퍼져 있다는 뜻입니다. 같은 점수 차이라도 표준편차가 작을수록 석차 차이가 커져요.</p></details>
+  </section>
+</div>
+<script>
+  function $(id) { return document.getElementById(id); }
+  function num(id) { return parseFloat($(id).value); }
+  // 표준정규분포 누적분포함수 (Abramowitz–Stegun 근사)
+  function phi(z) {
+    var t = 1 / (1 + 0.3275911 * Math.abs(z) / Math.SQRT2);
+    var y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-z * z / 2);
+    return z >= 0 ? (1 + y) / 2 : (1 - y) / 2;
+  }
+  var X = function (z) { return 300 + z * 80; }, Y = function (z) { return 190 - 160 * Math.exp(-z * z / 2); };
+  (function drawCurve() {
+    var d = "";
+    for (var z = -3.5; z <= 3.501; z += 0.05) d += (d ? "L" : "M") + X(z).toFixed(1) + "," + Y(z).toFixed(1);
+    $("line").setAttribute("d", d);
+    $("area").setAttribute("d", d + "L580,190L20,190Z");
+    $("shade").setAttribute("d", d + "L580,190L20,190Z");
+    var tk = "";
+    [-3, -2, -1, 0, 1, 2, 3].forEach(function (z) { tk += '<text x="' + X(z) + '" y="208" text-anchor="middle">' + (z === 0 ? "평균" : (z > 0 ? "+" : "") + z + "σ") + "</text>"; });
+    $("ticks").innerHTML = tk;
+  })();
+  function gradeOf(p, cuts) { for (var i = 0; i < cuts.length; i++) if (p <= cuts[i]) return i + 1; return cuts.length; }
+  var last = null;
+  function update() {
+    var x = num("score"), m = num("mean"), sd = num("sd"), n = parseInt($("n").value, 10);
+    if (isNaN(x) || isNaN(m) || !(sd > 0)) {
+      $("top").textContent = "-"; $("sub").textContent = "점수·평균·표준편차를 입력하세요.";
+      ["z", "rank", "g5", "g9"].forEach(function (id) { $(id).textContent = "-"; });
+      return;
+    }
+    var z = (x - m) / sd, top = (1 - phi(z)) * 100;
+    top = Math.min(99.99, Math.max(0.01, top));
+    $("top").textContent = "상위 " + top.toFixed(1) + "%";
+    $("sub").textContent = z >= 0 ? "평균보다 " + (x - m).toFixed(1) + "점 높아요" : "평균보다 " + (m - x).toFixed(1) + "점 낮아요";
+    SK.countUp($("z"), z, { decimals: 2 });
+    $("rank").textContent = n > 0 ? "약 " + Math.max(1, Math.ceil(top / 100 * n)) + "등" : "-";
+    var g5 = gradeOf(top, [10, 34, 66, 90, 100]), g9 = gradeOf(top, [4, 11, 23, 40, 60, 77, 89, 96, 100]);
+    $("g5").textContent = g5 + "등급";
+    $("g9").textContent = g9 + "등급";
+    var key = g5 + "/" + g9;
+    if (key !== last) { SK.pop($("g5")); SK.pop($("g9")); last = key; }
+    var zc = Math.max(-3.5, Math.min(3.5, z));
+    $("mv").style.transform = "translate(" + X(zc) + "px,0)";
+    $("clipRect").style.transform = "translateX(" + X(zc) + "px)";
+    SK.store.set("score-v", JSON.stringify([x, m, sd, n]));
+  }
+  try { var sv = JSON.parse(SK.store.get("score-v", "null")); if (sv) ["score", "mean", "sd", "n"].forEach(function (id, i) { if (sv[i] !== null && !isNaN(sv[i])) $(id).value = sv[i]; }); } catch (e) {}
+  ["score", "mean", "sd", "n"].forEach(function (id) { $(id).addEventListener("input", update); });
+  $("mv").style.transform = "translate(300px,0)";
+  $("clipRect").style.transform = "translateX(300px)";
+  requestAnimationFrame(function () { requestAnimationFrame(update); });
+</script>
+</body>
+</html>

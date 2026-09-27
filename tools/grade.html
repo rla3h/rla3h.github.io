@@ -11,6 +11,7 @@
   <meta property="og:site_name" content="스쿨킷" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://rla3h.github.io/tools/grade.html" />
+  <meta name="theme-color" content="#4c5cf5" />
   <link rel="stylesheet" href="assets/style.css" />
   <script src="assets/config.js"></script>
   <script src="assets/common.js"></script>
@@ -20,74 +21,101 @@
 </head>
 <body>
 <div class="wrap">
-  <header class="top"><a class="home" href="./">🎒 스쿨킷</a></header>
+  <span class="eyebrow">🏅 내신 등급</span>
   <h1>내신 등급 계산기</h1>
   <p class="lead">석차와 수강자 수를 입력하면 석차 백분율과 등급을 바로 계산합니다.</p>
 
   <div class="card">
-    <label for="system">등급 체계</label>
-    <select id="system">
-      <option value="5">5등급제 (2025학년도 고1~)</option>
-      <option value="9">9등급제 (기존)</option>
-    </select>
+    <div class="row" style="margin-top:0" id="sysBtns">
+      <button class="chip" data-sys="5">5등급제 (2025 고1~)</button>
+      <button class="chip ghost" data-sys="9">9등급제 (기존)</button>
+    </div>
     <div class="grid">
       <div><label for="rank">내 석차</label><input id="rank" type="number" min="1" value="10" inputmode="numeric" /></div>
       <div><label for="ties">동석차 인원 (나 포함)</label><input id="ties" type="number" min="1" value="1" inputmode="numeric" /></div>
       <div><label for="total">수강자 수</label><input id="total" type="number" min="1" value="200" inputmode="numeric" /></div>
     </div>
-    <div class="big" id="result">-</div>
-    <p class="lead" style="text-align:center" id="pct"></p>
+
+    <svg class="gauge" viewBox="0 0 220 125" aria-hidden="true">
+      <defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="var(--accent-3)" /><stop offset=".5" stop-color="var(--accent-2)" /><stop offset="1" stop-color="var(--accent)" /></linearGradient></defs>
+      <path class="track" d="M20,115 A90,90 0 0 1 200,115" fill="none" stroke-width="16" stroke-linecap="round" />
+      <path class="fill" id="arc" d="M20,115 A90,90 0 0 1 200,115" fill="none" stroke-width="16" stroke-linecap="round" stroke-dasharray="282.7" stroke-dashoffset="282.7" />
+    </svg>
+    <div class="big" id="result" style="margin-top:-66px;font-size:2.5rem">-</div>
+    <p class="center small" id="pct" style="margin:0"></p>
   </div>
 
   <div class="ad-slot" hidden></div>
 
-  <div class="card">
-    <h2 style="margin-top:0;font-size:1.1rem">수강자 수 기준 등급 컷</h2>
+  <div class="card reveal">
+    <h2>수강자 수 기준 등급 컷</h2>
     <table>
       <thead><tr><th>등급</th><th>누적 비율</th><th>누적 석차 (약)</th></tr></thead>
       <tbody id="cuts"></tbody>
     </table>
-    <p class="lead" style="font-size:.85rem;margin-top:8px">동석차·반올림 처리 방식에 따라 학교 산출 결과와 1~2명 차이가 날 수 있습니다. 공식 성적은 학교 성적표를 기준으로 하세요.</p>
+    <p class="small" style="margin-top:10px">동석차·반올림 처리 방식에 따라 학교 산출 결과와 1~2명 차이가 날 수 있습니다. 공식 성적은 학교 성적표를 기준으로 하세요.</p>
+  </div>
+
+  <div class="card reveal">
+    <h2>🎯 목표 등급까지 필요한 석차</h2>
+    <div class="row" style="margin-top:0">
+      <select id="goal" style="width:auto"></select>
+      <span id="goalText" style="font-weight:600"></span>
+    </div>
   </div>
 
   <div class="support" hidden></div>
 
-  <section class="card faq">
+  <section class="card faq reveal">
     <h2>자주 묻는 질문</h2>
-    <h3>5등급제 비율은 어떻게 되나요?</h3>
-    <p>1등급 10%, 2등급 누적 34%, 3등급 누적 66%, 4등급 누적 90%, 5등급 100%입니다.</p>
-    <h3>9등급제 비율은 어떻게 되나요?</h3>
-    <p>누적 4%, 11%, 23%, 40%, 60%, 77%, 89%, 96%, 100% 순으로 1~9등급이 정해집니다.</p>
-    <h3>석차 백분율은 어떻게 계산하나요?</h3>
-    <p>(석차 + (동석차 인원 − 1) ÷ 2) ÷ 수강자 수 × 100 으로 계산합니다.</p>
+    <details open><summary>5등급제 비율은 어떻게 되나요?</summary><p>1등급 10%, 2등급 누적 34%, 3등급 누적 66%, 4등급 누적 90%, 5등급 100%입니다.</p></details>
+    <details><summary>9등급제 비율은 어떻게 되나요?</summary><p>누적 4%, 11%, 23%, 40%, 60%, 77%, 89%, 96%, 100% 순으로 1~9등급이 정해집니다.</p></details>
+    <details><summary>석차 백분율은 어떻게 계산하나요?</summary><p>(석차 + (동석차 인원 − 1) ÷ 2) ÷ 수강자 수 × 100 으로 계산합니다.</p></details>
   </section>
-
-  <footer class="bottom"><a href="./">다른 도구 보기</a></footer>
 </div>
 <script>
   var CUTS = { "5": [10, 34, 66, 90, 100], "9": [4, 11, 23, 40, 60, 77, 89, 96, 100] };
-  function val(id) { return parseInt(document.getElementById(id).value, 10); }
+  var sys = SK.store.get("grade-sys", "5"), lastGrade = null, ARC = 282.7;
+  function $(id) { return document.getElementById(id); }
+  function val(id) { return parseInt($(id).value, 10); }
+  function paintSys() {
+    document.querySelectorAll("[data-sys]").forEach(function (b) { b.classList.toggle("ghost", b.dataset.sys !== sys); });
+    var g = $("goal"), keep = g.value;
+    g.innerHTML = CUTS[sys].slice(0, -1).map(function (_, i) { return '<option value="' + i + '">' + (i + 1) + "등급 목표</option>"; }).join("");
+    g.value = keep && +keep < CUTS[sys].length - 1 ? keep : "0";
+  }
   function update() {
-    var sys = document.getElementById("system").value, cuts = CUTS[sys];
-    var rank = val("rank"), ties = val("ties") || 1, total = val("total");
-    var out = document.getElementById("result"), pct = document.getElementById("pct");
-    var body = document.getElementById("cuts");
+    var cuts = CUTS[sys], rank = val("rank"), ties = val("ties") || 1, total = val("total");
+    var out = $("result"), pct = $("pct"), body = $("cuts");
+    var valid = rank > 0 && total > 0 && rank <= total;
+    var p = valid ? (rank + (ties - 1) / 2) / total * 100 : null, g = null;
+    if (valid) { g = cuts.length; for (var i = 0; i < cuts.length; i++) { if (p <= cuts[i]) { g = i + 1; break; } } }
+
     body.innerHTML = "";
     if (total > 0) {
       cuts.forEach(function (c, i) {
         var tr = document.createElement("tr");
-        tr.innerHTML = "<td>" + (i + 1) + "등급</td><td>" + c + "%</td><td>" + Math.round(total * c / 100) + "등</td>";
+        if (g === i + 1) tr.className = "me";
+        tr.innerHTML = "<td>" + (i + 1) + "등급" + (g === i + 1 ? " ← 나" : "") + "</td><td>" + c + "%</td><td>" + Math.round(total * c / 100) + "등</td>";
         body.appendChild(tr);
       });
     }
-    if (!(rank > 0 && total > 0) || rank > total) { out.textContent = "-"; pct.textContent = "석차와 수강자 수를 확인하세요."; return; }
-    var p = (rank + (ties - 1) / 2) / total * 100, g = cuts.length;
-    for (var i = 0; i < cuts.length; i++) { if (p <= cuts[i]) { g = i + 1; break; } }
+    var gi = +$("goal").value, need = Math.floor(total * cuts[gi] / 100);
+    $("goalText").textContent = !(total > 0) ? "" : need < 1 ? "수강자 수가 적어 해당 등급 인원이 없어요" :
+      "석차 약 " + need + "등 이내" + (valid ? (rank <= need ? " · 이미 달성! 🎉" : " · " + (rank - need) + "등 올리면 돼요") : "");
+
+    if (!valid) { out.textContent = "-"; pct.textContent = "석차와 수강자 수를 확인하세요."; $("arc").style.strokeDashoffset = ARC; lastGrade = null; return; }
     out.textContent = g + "등급";
-    pct.textContent = "석차 백분율 " + p.toFixed(2) + "%";
+    if (g !== lastGrade) SK.pop(out);
+    lastGrade = g;
+    pct.textContent = "석차 백분율 " + p.toFixed(2) + "% · 상위 " + p.toFixed(1) + "%";
+    $("arc").style.strokeDashoffset = ARC * (p / 100);
+    SK.store.set("grade-sys", sys);
   }
-  ["system", "rank", "ties", "total"].forEach(function (id) { document.getElementById(id).addEventListener("input", update); });
-  update();
+  document.querySelectorAll("[data-sys]").forEach(function (b) { b.onclick = function () { sys = b.dataset.sys; paintSys(); update(); }; });
+  ["rank", "ties", "total", "goal"].forEach(function (id) { $(id).addEventListener("input", update); });
+  paintSys();
+  requestAnimationFrame(function () { requestAnimationFrame(update); });
 </script>
 </body>
 </html>
