@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>글자수 세기 · 생기부 바이트 계산기 (공백 포함/제외, NEIS 기준)</title>
+  <meta name="description" content="자기소개서·생활기록부(생기부) 세특 글자수와 NEIS 바이트를 실시간으로 계산합니다. 공백 포함/제외 글자수, 단어 수, 줄 수, 바이트를 한 번에 확인하세요. 무료·설치 없음." />
+  <link rel="canonical" href="https://rla3h.github.io/tools/char-count.html" />
+  <meta property="og:title" content="글자수 세기 · 생기부 바이트 계산기" />
+  <meta property="og:description" content="공백 포함/제외 글자수와 NEIS 바이트를 실시간으로 계산" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rla3h.github.io/tools/char-count.html" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script src="assets/config.js"></script>
+  <script src="assets/common.js"></script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"글자수 세기 · 생기부 바이트 계산기","url":"https://rla3h.github.io/tools/char-count.html","applicationCategory":"UtilitiesApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"}}
+  </script>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><a class="home" href="./">📚 학생 무료 도구</a></header>
+  <h1>글자수 세기 · 생기부 바이트 계산기</h1>
+  <p class="lead">입력하는 즉시 공백 포함/제외 글자수와 NEIS 바이트가 계산됩니다. 입력한 글은 서버로 전송되지 않습니다.</p>
+
+  <div class="card">
+    <textarea id="text" placeholder="여기에 자기소개서, 세특, 과제 글을 붙여넣으세요."></textarea>
+    <div class="row">
+      <label style="margin:0;flex:1;font-weight:500">목표 바이트
+        <input id="limit" type="number" min="0" value="1500" inputmode="numeric" />
+      </label>
+    </div>
+    <div class="grid" style="margin-top:12px">
+      <div class="stat"><b id="withSpace">0</b><span>공백 포함 글자수</span></div>
+      <div class="stat"><b id="noSpace">0</b><span>공백 제외 글자수</span></div>
+      <div class="stat"><b id="bytes">0</b><span>NEIS 바이트</span></div>
+      <div class="stat"><b id="remain">1500</b><span>남은 바이트</span></div>
+      <div class="stat"><b id="words">0</b><span>단어 수</span></div>
+      <div class="stat"><b id="lines">0</b><span>줄 수</span></div>
+    </div>
+    <div class="row">
+      <button id="copy">복사</button>
+      <button class="ghost" id="trim">연속 공백 정리</button>
+      <button class="ghost" id="clear">지우기</button>
+    </div>
+  </div>
+
+  <div class="ad-slot" hidden></div>
+  <div class="support" hidden></div>
+
+  <section class="card faq">
+    <h2>자주 묻는 질문</h2>
+    <h3>NEIS 바이트는 어떻게 계산하나요?</h3>
+    <p>나이스(NEIS) 기준으로 한글 1자는 3바이트, 영문·숫자·공백·특수문자는 1바이트, 줄바꿈(엔터)은 2바이트로 계산합니다. 학교 입력 규정이 다를 수 있으니 최종 입력 전 확인하세요.</p>
+    <h3>세특은 몇 바이트까지 쓸 수 있나요?</h3>
+    <p>과목별 세부능력 및 특기사항은 일반적으로 500자(1,500바이트) 이내입니다. 항목마다 다르니 위의 ‘목표 바이트’를 바꿔서 사용하세요.</p>
+    <h3>자기소개서 글자수는 공백 포함인가요?</h3>
+    <p>대부분의 대학·기업은 공백 포함 글자수를 기준으로 합니다. 모집 요강을 확인하세요.</p>
+  </section>
+
+  <footer class="bottom"><a href="./">다른 도구 보기</a></footer>
+</div>
+<script>
+  var t = document.getElementById("text"), lim = document.getElementById("limit");
+  function neisBytes(s) {
+    var b = 0;
+    for (var i = 0; i < s.length; i++) {
+      var ch = s.charAt(i);
+      if (ch === "\r") continue;
+      if (ch === "\n") b += 2;
+      else if (s.charCodeAt(i) > 127) b += 3;
+      else b += 1;
+    }
+    return b;
+  }
+  function update() {
+    var s = t.value, b = neisBytes(s), max = parseInt(lim.value, 10) || 0;
+    document.getElementById("withSpace").textContent = Array.from(s.replace(/\r?\n/g, "")).length.toLocaleString();
+    document.getElementById("noSpace").textContent = Array.from(s.replace(/\s/g, "")).length.toLocaleString();
+    document.getElementById("bytes").textContent = b.toLocaleString();
+    var r = document.getElementById("remain");
+    r.textContent = (max - b).toLocaleString();
+    r.style.color = max - b < 0 ? "#e03131" : "";
+    document.getElementById("words").textContent = (s.trim() ? s.trim().split(/\s+/).length : 0).toLocaleString();
+    document.getElementById("lines").textContent = (s ? s.split(/\n/).length : 0).toLocaleString();
+    try { localStorage.setItem("cc-text", s); } catch (e) {}
+  }
+  try { t.value = localStorage.getItem("cc-text") || ""; } catch (e) {}
+  t.addEventListener("input", update);
+  lim.addEventListener("input", update);
+  document.getElementById("copy").onclick = function () { navigator.clipboard && navigator.clipboard.writeText(t.value); };
+  document.getElementById("trim").onclick = function () { t.value = t.value.replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim(); update(); };
+  document.getElementById("clear").onclick = function () { t.value = ""; update(); };
+  update();
+</script>
+</body>
+</html>

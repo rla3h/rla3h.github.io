@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>수능 D-day · 디데이 계산기 (날짜 계산, 며칠 남았는지)</title>
+  <meta name="description" content="수능, 시험, 기념일까지 며칠 남았는지 계산하는 디데이 계산기. 두 날짜 사이 일수와 N일 후 날짜도 계산합니다." />
+  <link rel="canonical" href="https://rla3h.github.io/tools/dday.html" />
+  <meta property="og:title" content="수능 D-day · 디데이 계산기" />
+  <meta property="og:description" content="수능·시험·기념일까지 남은 날 계산" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rla3h.github.io/tools/dday.html" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script src="assets/config.js"></script>
+  <script src="assets/common.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><a class="home" href="./">📚 학생 무료 도구</a></header>
+  <h1>디데이 계산기</h1>
+  <p class="lead">목표 날짜까지 남은 날, 두 날짜 사이 일수, N일 후 날짜를 계산합니다.</p>
+
+  <div class="card">
+    <label for="target">목표 날짜</label>
+    <input id="target" type="date" />
+    <div class="row">
+      <button class="ghost" data-preset="suneung">2027학년도 수능 (2026.11.19)</button>
+    </div>
+    <div class="big" id="dday">-</div>
+    <p class="lead" style="text-align:center" id="ddayInfo"></p>
+    <p class="lead" style="font-size:.85rem;text-align:center">수능 날짜는 교육부 발표 기준 예정일이며 변경될 수 있습니다.</p>
+  </div>
+
+  <div class="ad-slot" hidden></div>
+
+  <div class="card">
+    <h2 style="margin-top:0;font-size:1.1rem">두 날짜 사이 일수</h2>
+    <div class="grid">
+      <div><label for="from">시작일</label><input id="from" type="date" /></div>
+      <div><label for="to">종료일</label><input id="to" type="date" /></div>
+    </div>
+    <p class="big" id="between" style="font-size:1.8rem">-</p>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0;font-size:1.1rem">N일 후 날짜</h2>
+    <div class="grid">
+      <div><label for="base">기준일</label><input id="base" type="date" /></div>
+      <div><label for="n">더할 일수 (음수 가능)</label><input id="n" type="number" value="100" /></div>
+    </div>
+    <p class="big" id="after" style="font-size:1.8rem">-</p>
+  </div>
+
+  <div class="support" hidden></div>
+  <footer class="bottom"><a href="./">다른 도구 보기</a></footer>
+</div>
+<script>
+  var DAY = 86400000, WD = ["일", "월", "화", "수", "목", "금", "토"];
+  function parse(v) { if (!v) return null; var p = v.split("-"); return Date.UTC(+p[0], p[1] - 1, +p[2]); }
+  function today() { var d = new Date(); return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()); }
+  function fmt(ms) { var d = new Date(ms); return d.getUTCFullYear() + "." + (d.getUTCMonth() + 1) + "." + d.getUTCDate() + " (" + WD[d.getUTCDay()] + ")"; }
+  function iso(ms) { return new Date(ms).toISOString().slice(0, 10); }
+  function $(id) { return document.getElementById(id); }
+
+  function updateDday() {
+    var t = parse($("target").value);
+    if (t === null) { $("dday").textContent = "-"; $("ddayInfo").textContent = ""; return; }
+    var diff = Math.round((t - today()) / DAY);
+    $("dday").textContent = diff > 0 ? "D-" + diff : diff === 0 ? "D-Day" : "D+" + (-diff);
+    $("ddayInfo").textContent = fmt(t) + (diff > 0 ? " · 약 " + (diff / 7).toFixed(1) + "주 남음" : "");
+    try { localStorage.setItem("dday-target", $("target").value); } catch (e) {}
+  }
+  function updateBetween() {
+    var a = parse($("from").value), b = parse($("to").value);
+    $("between").textContent = a === null || b === null ? "-" : Math.round((b - a) / DAY) + "일 (당일 포함 " + (Math.abs(Math.round((b - a) / DAY)) + 1) + "일)";
+  }
+  function updateAfter() {
+    var a = parse($("base").value), n = parseInt($("n").value, 10);
+    $("after").textContent = a === null || isNaN(n) ? "-" : fmt(a + n * DAY);
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem("dday-target"); } catch (e) {}
+  $("target").value = saved || "2026-11-19";
+  $("from").value = $("base").value = $("to").value = iso(today());
+  document.querySelector("[data-preset=suneung]").onclick = function () { $("target").value = "2026-11-19"; updateDday(); };
+  $("target").addEventListener("input", updateDday);
+  ["from", "to"].forEach(function (id) { $(id).addEventListener("input", updateBetween); });
+  ["base", "n"].forEach(function (id) { $(id).addEventListener("input", updateAfter); });
+  updateDday(); updateBetween(); updateAfter();
+</script>
+</body>
+</html>
