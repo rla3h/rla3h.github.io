@@ -4,7 +4,7 @@
 // ============================================================
 window.SITE_CONFIG = {
   // Google AdSense 게시자 ID (예: "ca-pub-1234567890123456")
-  adsenseClient: "",
+  adsenseClient: "ca-pub-9311904562813203",
   // AdSense 광고 단위 슬롯 ID (예: "1234567890"). 비우면 자동 광고만 사용
   adsenseSlot: "",
 
