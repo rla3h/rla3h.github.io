@@ -134,7 +134,7 @@
     ft.innerHTML =
       '<div class="links"><a href="./">스쿨킷 홈</a>' +
       TOOLS.map(function (t) { return '<a href="' + t.href + '">' + t.name + "</a>"; }).join("") +
-      "</div>© " + new Date().getFullYear() + " 스쿨킷 · 입력한 내용은 서버로 전송되지 않고 내 기기에만 저장됩니다.";
+      '<a href="privacy.html">개인정보처리방침</a></div>© ' + new Date().getFullYear() + " 스쿨킷 · 입력한 내용은 서버로 전송되지 않고 내 기기에만 저장됩니다.";
     body.appendChild(ft);
 
     // 토스트
