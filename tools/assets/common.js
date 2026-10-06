@@ -14,14 +14,21 @@
     return window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
   }
 
+  // ---------- 경로 기준 (어느 폴더의 페이지에서든 링크가 맞도록) ----------
+  // 이 스크립트는 /tools/assets/common.js 에 있으므로 두 단계 위가 사이트 루트
+  var me = document.currentScript && document.currentScript.src;
+  var TOOLS_BASE = me ? new URL("../", me).href : "/tools/";
+  var SITE_ROOT = me ? new URL("../../", me).href : "/";
+
   // ---------- 도구 목록 (네비·푸터 공용) ----------
   var TOOLS = [
     { href: "char-count.html", ico: "✍️", name: "글자수·바이트" },
     { href: "grade.html", ico: "🏅", name: "내신 등급" },
     { href: "score.html", ico: "📊", name: "성적 위치" },
     { href: "timer.html", ico: "⏱️", name: "공부 타이머" },
-    { href: "dday.html", ico: "📅", name: "디데이" }
-  ];
+    { href: "dday.html", ico: "📅", name: "디데이" },
+    { href: "guide/", ico: "📚", name: "공부 가이드" }
+  ].map(function (t) { t.url = TOOLS_BASE + t.href; return t; });
 
   var reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -99,7 +106,8 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     var body = document.body;
-    var here = location.pathname.split("/").pop() || "index.html";
+    var here = location.href.split(/[?#]/)[0].replace(/index\.html$/, "");
+    var isOn = function (t) { return t.href === "guide/" ? here.indexOf(t.url) === 0 : here === t.url; };
 
     // 배경
     var bg = document.createElement("div");
@@ -112,9 +120,9 @@
     var nav = document.createElement("nav");
     nav.className = "nav";
     nav.innerHTML =
-      '<div class="nav-inner"><a class="logo" href="./">🎒 <b>스쿨킷</b></a><div class="nav-links">' +
+      '<div class="nav-inner"><a class="logo" href="' + SITE_ROOT + '">🎒 <b>스쿨킷</b></a><div class="nav-links">' +
       TOOLS.map(function (t) {
-        return '<a href="' + t.href + '"' + (t.href === here ? ' class="on"' : "") + ' title="' + t.name + '">' + t.ico + ' <span class="txt">' + t.name + "</span></a>";
+        return '<a href="' + t.url + '"' + (isOn(t) ? ' class="on"' : "") + ' title="' + t.name + '">' + t.ico + ' <span class="txt">' + t.name + "</span></a>";
       }).join("") +
       '</div><button class="theme-btn" type="button" aria-label="다크 모드 전환"></button></div>';
     body.prepend(nav);
@@ -132,9 +140,12 @@
     var ft = document.createElement("footer");
     ft.className = "site";
     ft.innerHTML =
-      '<div class="links"><a href="./">스쿨킷 홈</a>' +
-      TOOLS.map(function (t) { return '<a href="' + t.href + '">' + t.name + "</a>"; }).join("") +
-      '<a href="privacy.html">개인정보처리방침</a></div>© ' + new Date().getFullYear() + " 스쿨킷 · 입력한 내용은 서버로 전송되지 않고 내 기기에만 저장됩니다.";
+      '<div class="links"><a href="' + SITE_ROOT + '">스쿨킷 홈</a>' +
+      TOOLS.map(function (t) { return '<a href="' + t.url + '">' + t.name + "</a>"; }).join("") +
+      "</div><div class=\"links\">" +
+      [["about.html", "스쿨킷 소개"], ["contact.html", "문의"], ["privacy.html", "개인정보처리방침"]]
+        .map(function (l) { return '<a href="' + TOOLS_BASE + l[0] + '">' + l[1] + "</a>"; }).join("") +
+      "</div>© " + new Date().getFullYear() + " 스쿨킷 · 입력한 내용은 서버로 전송되지 않고 내 기기에만 저장됩니다.";
     body.appendChild(ft);
 
     // 토스트

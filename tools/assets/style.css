@@ -331,3 +331,31 @@ footer.site a:hover { color: var(--accent); }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ============ 글(가이드·소개) 페이지 ============ */
+.post { max-width: 760px; margin: 0 auto; }
+.crumbs { font-size: .85rem; color: var(--muted); margin-bottom: 8px; }
+.crumbs a { color: var(--muted); text-decoration: none; }
+.crumbs a:hover { color: var(--accent); }
+.post-body { font-size: 1.04rem; line-height: 1.85; }
+.post-body h2 { font-size: 1.3rem; margin: 36px 0 10px; padding-top: 4px; }
+.post-body p, .post-body li { color: var(--text); }
+.post-body ul, .post-body ol { padding-left: 1.3em; }
+.post-body li { margin: 6px 0; }
+.post-body table { margin: 14px 0; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; border-collapse: separate; border-spacing: 0; }
+.post-body th { background: var(--accent-soft); color: var(--accent); }
+.post-body tr:last-child td { border-bottom: 0; }
+.note { background: var(--accent-soft); border-left: 4px solid var(--accent); border-radius: 10px; padding: 12px 14px; font-size: .95rem; color: var(--muted) !important; }
+.formula { text-align: center; font-weight: 700; background: var(--card); border: 1.5px dashed var(--accent); border-radius: 12px; padding: 14px; }
+.tool-cta {
+  display: flex; align-items: center; gap: 8px; margin: 18px 0;
+  padding: 14px 18px; border-radius: 14px; text-decoration: none; color: var(--text);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, var(--card)), color-mix(in srgb, var(--accent-2) 12%, var(--card)));
+  border: 1px solid var(--line); transition: transform .2s, box-shadow .2s;
+}
+.tool-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.tool-cta b { color: var(--accent); }
+.related ul, .guide-list ul { padding-left: 1.1em; margin: 8px 0; }
+.related li, .guide-list li { margin: 8px 0; }
+.related a, .guide-list a { text-decoration: none; font-weight: 600; }
+.related a:hover, .guide-list a:hover { text-decoration: underline; }
