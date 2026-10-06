@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="google-adsense-account" content="ca-pub-9311904562813203" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>생기부 NEIS 바이트 계산법과 바이트 줄이는 7가지 방법 | 스쿨킷</title>
+  <meta name="description" content="생활기록부(생기부) 세특·창체를 NEIS에 입력할 때 바이트는 어떻게 계산될까요? 한글·영문·숫자·줄바꿈의 바이트 규칙과 내용은 그대로 두고 바이트를 줄이는 실전 방법을 정리했습니다." />
+  <link rel="canonical" href="https://rla3h.github.io/tools/guide/neis-byte.html" />
+  <meta property="og:title" content="생기부 NEIS 바이트 계산법과 바이트 줄이는 7가지 방법 | 스쿨킷" />
+  <meta property="og:description" content="생활기록부(생기부) 세특·창체를 NEIS에 입력할 때 바이트는 어떻게 계산될까요? 한글·영문·숫자·줄바꿈의 바이트 규칙과 내용은 그대로 두고 바이트를 줄이는 실전 방법을 정리했습니다." />
+  <meta property="og:site_name" content="스쿨킷" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rla3h.github.io/tools/guide/neis-byte.html" />
+  <meta name="theme-color" content="#4c5cf5" />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <script src="../assets/config.js"></script>
+  <script src="../assets/common.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"생기부 NEIS 바이트 계산법과 바이트 줄이는 7가지 방법","description":"생활기록부(생기부) 세특·창체를 NEIS에 입력할 때 바이트는 어떻게 계산될까요? 한글·영문·숫자·줄바꿈의 바이트 규칙과 내용은 그대로 두고 바이트를 줄이는 실전 방법을 정리했습니다.","datePublished":"2026-10-06","dateModified":"2026-10-06","inLanguage":"ko","author":{"@type":"Organization","name":"스쿨킷"},"publisher":{"@type":"Organization","name":"스쿨킷"},"mainEntityOfPage":"https://rla3h.github.io/tools/guide/neis-byte.html"}</script>
+</head>
+<body>
+<div class="wrap">
+  <article class="post">
+    <nav class="crumbs"><a href="../../">스쿨킷</a> › <a href="./">공부 가이드</a></nav>
+    <span class="eyebrow">✍️ 공부 가이드</span>
+    <h1>생기부 NEIS 바이트 계산법과 바이트 줄이는 7가지 방법</h1>
+    <p class="lead">생활기록부(생기부) 세특·창체를 NEIS에 입력할 때 바이트는 어떻게 계산될까요? 한글·영문·숫자·줄바꿈의 바이트 규칙과 내용은 그대로 두고 바이트를 줄이는 실전 방법을 정리했습니다.</p>
+    <p class="small">스쿨킷 · 2026-10-06 업데이트</p>
+    <a class="tool-cta" href="../char-count.html">✍️ <b>글자수·바이트 계산기</b> 바로 쓰기 →</a>
+    <div class="post-body">
+<p>생활기록부의 세부능력 및 특기사항(세특)이나 창의적 체험활동 기록은 <b>글자 수가 아니라 바이트(byte)</b>로 분량을 제한하는 경우가 많습니다. 학생이 초안을 쓰거나 선생님이 입력할 때 "500자인데 왜 넘친다고 나오지?" 하는 일이 생기는 이유가 바로 이 차이 때문입니다.</p>
+
+<h2>1. NEIS 바이트 계산 규칙</h2>
+<p>일반적으로 안내되는 NEIS 기준은 다음과 같습니다.</p>
+<table>
+<thead><tr><th>문자 종류</th><th>바이트</th><th>예시</th></tr></thead>
+<tbody>
+<tr><td>한글 1글자</td><td>3바이트</td><td>‘가’ → 3B</td></tr>
+<tr><td>영문·숫자 1글자</td><td>1바이트</td><td>‘A’, ‘7’ → 1B</td></tr>
+<tr><td>띄어쓰기(공백)</td><td>1바이트</td><td>‘ ’ → 1B</td></tr>
+<tr><td>키보드 기본 특수문자</td><td>1바이트</td><td>. , ( ) - ! ?</td></tr>
+<tr><td>줄바꿈(엔터)</td><td>2바이트</td><td>문단 나누기 1번 → 2B</td></tr>
+</tbody>
+</table>
+<p>그래서 <b>한글만으로 쓴 500자</b>는 약 1,500바이트가 됩니다. 반대로 같은 1,500바이트라도 숫자·영문·공백이 섞이면 더 많은 글자를 넣을 수 있습니다.</p>
+<p class="note">‘·’, ‘→’, ‘※’ 같은 전각 기호나 한자는 한글처럼 3바이트로 계산될 수 있습니다. 학교 시스템과 학년도 지침에 따라 세부 기준이 다를 수 있으니, 최종 입력 전에는 반드시 학교 안내를 확인하세요.</p>
+
+<h2>2. 바이트가 넘칠 때 줄이는 7가지 방법</h2>
+<ol>
+<li><b>불필요한 줄바꿈 없애기</b> — 줄바꿈 1번이 2바이트입니다. 문단 구분이 꼭 필요하지 않은 항목이라면 한 문단으로 이어 쓰세요. 스쿨킷 계산기의 ‘줄바꿈 없애기’ 버튼으로 한 번에 정리할 수 있습니다.</li>
+<li><b>연속 공백 정리</b> — 복사·붙여넣기 과정에서 띄어쓰기가 두 번 들어간 곳이 의외로 많습니다.</li>
+<li><b>숫자는 아라비아 숫자로</b> — ‘세 번’(7B)보다 ‘3번’(4B)이 짧습니다. ‘이십 명’보다 ‘20명’이 유리합니다.</li>
+<li><b>반복 표현 줄이기</b> — "~하였으며, ~하였고, ~하였음"처럼 같은 어미가 이어지면 한 문장으로 묶어 보세요.</li>
+<li><b>꾸밈말보다 구체적 사실</b> — "매우 열정적으로 적극 참여함"보다 "토론에서 반론 3가지를 근거와 함께 제시함"이 짧으면서도 정보가 많습니다.</li>
+<li><b>괄호 설명 줄이기</b> — 괄호 안 보충 설명은 꼭 필요한 경우만 남깁니다.</li>
+<li><b>전각 기호를 일반 기호로</b> — ‘·’ 대신 쉼표, ‘→’ 대신 문장으로 풀어 쓰면 바이트가 줄 수 있습니다.</li>
+</ol>
+
+<h2>3. 계산 예시</h2>
+<p>"수학 탐구 보고서를 작성함."이라는 문장은 한글 11자(33B) + 공백 2개(2B) + 마침표 1개(1B)로 <b>36바이트</b>입니다. 이 문장 뒤에 줄바꿈을 넣으면 38바이트가 됩니다. 이렇게 한 문장씩 따지기는 번거로우니, 초안을 통째로 붙여 넣고 목표 바이트를 1,500으로 설정해 남은 양을 확인하는 것이 가장 빠릅니다.</p>
+
+<h2>4. 자주 하는 실수</h2>
+<ul>
+<li><b>글자 수만 보고 안심하기</b> — 워드프로세서의 글자 수는 바이트와 다릅니다.</li>
+<li><b>문서 프로그램에서 복사할 때 생기는 특수 공백</b> — 일부 프로그램은 보이지 않는 문자를 함께 복사합니다. 메모장에 한 번 붙여 넣었다가 다시 복사하면 대부분 해결됩니다.</li>
+<li><b>마지막 줄의 줄바꿈</b> — 글 끝에 남은 빈 줄도 바이트에 포함됩니다.</li>
+</ul>
+<p>정리하면, 생기부 분량은 <b>한글 3B · 영문/숫자/공백 1B · 줄바꿈 2B</b>를 기억하고, 줄바꿈과 반복 표현부터 줄이는 것이 가장 효과적입니다.</p>
+</div>
+    <div class="ad-slot" hidden></div>
+    <a class="tool-cta" href="../char-count.html">✍️ 직접 계산해 보기: <b>글자수·바이트 계산기</b> →</a>
+    <section class="card related">
+      <h2>함께 읽으면 좋은 글</h2>
+      <ul><li><a href="grade-5-system.html">🏅 2025 고교학점제 내신 5등급제 총정리: 비율, 적용 대상, 달라진 점</a></li><li><a href="grade-5-vs-9.html">⚖️ 5등급제 vs 9등급제 비교: 같은 석차면 몇 등급일까?</a></li><li><a href="rank-percentile.html">🔢 석차 백분율 계산법: 동석차가 있으면 어떻게 계산할까?</a></li><li><a href="standard-deviation.html">📊 성적표의 표준편차 읽는 법: Z점수로 내 위치 알아보기</a></li></ul>
+      <p class="small"><a href="./">공부 가이드 전체 보기 →</a></p>
+    </section>
+  </article>
+  <div class="support" hidden></div>
+</div>
+</body>
+</html>

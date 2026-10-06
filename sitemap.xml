@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://rla3h.github.io/tools/</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://rla3h.github.io/tools/char-count.html</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://rla3h.github.io/tools/grade.html</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://rla3h.github.io/tools/score.html</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://rla3h.github.io/tools/timer.html</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://rla3h.github.io/tools/dday.html</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://rla3h.github.io/tools/privacy.html</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://rla3h.github.io/</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/char-count.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/grade.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/score.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/timer.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/dday.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/guide/</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/guide/neis-byte.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/guide/grade-5-system.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/guide/grade-5-vs-9.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/guide/rank-percentile.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/guide/standard-deviation.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/guide/pomodoro.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/guide/dday-count.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/guide/essay-char-count.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/about.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/contact.html</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://rla3h.github.io/tools/privacy.html</loc><lastmod>2026-10-06</lastmod></url>
 </urlset>

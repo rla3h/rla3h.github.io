@@ -13,6 +13,9 @@ window.SITE_CONFIG = {
 
   // 후원 링크 (Buy Me a Coffee, Toss 익명송금 링크 등). 비우면 숨김
   supportUrl: "",
+  // 문의 이메일 (문의 페이지에 표시). 비우면 GitHub 이슈 링크만 표시
+  contactEmail: "",
+
   supportLabel: "☕ 도움이 됐다면 커피 한 잔 후원하기",
 
   // 사이트 기본 주소 (끝에 / 없이)

@@ -1,488 +1,111 @@
-<!DOCTYPE HTML>
-<!--
-	Read Only by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>공학부</title>
-		<meta charset="utf-8" />
-		<meta name="google-adsense-account" content="ca-pub-9311904562813203" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="google-adsense-account" content="ca-pub-9311904562813203" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>스쿨킷 · 학생 무료 도구 모음 (글자수 세기, 내신 등급 계산기, 공부 타이머, 수능 디데이)</title>
+  <meta name="description" content="스쿨킷은 고등학생을 위한 무료 온라인 도구 모음입니다. 생기부 바이트 계산기, 글자수 세기, 내신 5등급제·9등급제 계산기, 성적 위치(표준편차) 계산기, 뽀모도로 공부 타이머, 수능 D-day와 공부 가이드를 설치 없이 바로 사용하세요." />
+  <link rel="canonical" href="https://rla3h.github.io/" />
+  <meta property="og:title" content="스쿨킷 · 학생 무료 도구 모음 (글자수 세기, 내신 등급 계산기, 공부 타이머, 수능 디데이)" />
+  <meta property="og:description" content="스쿨킷은 고등학생을 위한 무료 온라인 도구 모음입니다. 생기부 바이트 계산기, 글자수 세기, 내신 5등급제·9등급제 계산기, 성적 위치(표준편차) 계산기, 뽀모도로 공부 타이머, 수능 D-day와 공부 가이드를 설치 없이 바로 사용하세요." />
+  <meta property="og:site_name" content="스쿨킷" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rla3h.github.io/" />
+  <meta name="theme-color" content="#4c5cf5" />
+  <link rel="stylesheet" href="tools/assets/style.css" />
+  <script src="tools/assets/config.js"></script>
+  <script src="tools/assets/common.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"스쿨킷","url":"https://rla3h.github.io/","description":"고등학생을 위한 무료 온라인 도구 모음"}</script>
+</head>
+<body>
+<div class="wrap wide">
+  <section class="hero">
+    <span class="eyebrow">✨ 설치·로그인 없이 100% 무료</span>
+    <h1><span class="rotator" id="rot"><span>생기부 쓸 때도</span></span><br /><span class="grad-text">스쿨킷</span> 하나면 끝</h1>
+    <p class="lead">글자수 세기부터 내신 등급, 성적 위치, 공부 타이머, 수능 디데이까지. 학생에게 꼭 필요한 도구와 정보를 모았어요.</p>
+    <div class="hero-cta">
+      <a class="btn primary" href="tools/char-count.html">✍️ 바이트 계산하기</a>
+      <a class="btn sub" href="#tools">전체 도구 보기 ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div><b data-count="5">0</b><span>개 무료 도구</span></div>
+      <div><b data-count="8">0</b><span>편 공부 가이드</span></div>
+      <div><b data-count="100" data-suffix="%">0%</b><span>내 기기에만 저장</span></div>
+    </div>
+  </section>
 
-		<!-- Header -->
-			<section id="header">
-				<header>
-					<span class="image avatar"><img src="images/profile.png" alt="" /></span>
-					<h1 id="logo"><a href="#">20910 김도윤 20924 정유찬 20916 오서훈</a></h1>
-					<p>우리의 활동과 조사한 것을 모아서 올립니다<br />
-   					<a href="https://www.youtube.com/watch?v=jjkkSphnqmU">related with me</a></p>
+  <div class="tool-grid" id="tools">
+    <a class="card tool reveal" href="tools/char-count.html">
+      <span class="badge">인기</span>
+      <span class="ico">✍️</span>
+      <h2>글자수 세기 · 생기부 바이트</h2>
+      <p>공백 포함/제외 글자수와 NEIS 바이트를 실시간으로. 목표 바이트 진행 바까지.</p>
+      <span class="go">바로 쓰기 <i>→</i></span>
+    </a>
+    <a class="card tool reveal" href="tools/grade.html">
+      
+      <span class="ico">🏅</span>
+      <h2>내신 등급 계산기</h2>
+      <p>석차·수강자 수로 5등급제/9등급제 등급과 등급 컷을 한눈에.</p>
+      <span class="go">바로 쓰기 <i>→</i></span>
+    </a>
+    <a class="card tool reveal" href="tools/score.html">
+      
+      <span class="ico">📊</span>
+      <h2>성적 위치 계산기</h2>
+      <p>원점수·평균·표준편차로 상위 몇 %인지, 예상 등급을 그래프로 확인.</p>
+      <span class="go">바로 쓰기 <i>→</i></span>
+    </a>
+    <a class="card tool reveal" href="tools/timer.html">
+      
+      <span class="ico">⏱️</span>
+      <h2>뽀모도로 공부 타이머</h2>
+      <p>25분 집중 + 5분 휴식. 오늘 공부한 시간이 자동으로 쌓여요.</p>
+      <span class="go">바로 쓰기 <i>→</i></span>
+    </a>
+    <a class="card tool reveal" href="tools/dday.html">
+      
+      <span class="ico">📅</span>
+      <h2>수능 D-day · 디데이</h2>
+      <p>실시간 카운트다운, 디데이 목록 저장, 두 날짜 사이 일수 계산.</p>
+      <span class="go">바로 쓰기 <i>→</i></span>
+    </a>
+  </div>
 
-				</header>
-				<nav id="nav">
-					<ul>
-						<li><a href="#one" class="active">생활 속 알고리즘</a></li>
-						<li><a href="#two">예</a></li>
-						<li><a href="#three">공학자가 되기 위해 노력하는 것</a></li>
-						<li><a href="#four">힘들때 극복했던 것은?</a></li>
-						<li><a href="#five">멘토의 지향점과 모토</a></li>
-						<li><a href="#six">후기</a></li>
-					</ul>
-				</nav>
-				<footer>
-					<ul class="icons">
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-					</ul>
-				</footer>
-			</section>
+  <div class="ad-slot" hidden></div>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+  <section class="card reveal guide-list" style="margin-top:28px">
+    <h2>📚 공부 가이드</h2>
+    <p class="small">도구를 쓰기 전에 알아두면 좋은 기준과 방법을 정리했어요.</p>
+    <ul><li><a href="tools/guide/neis-byte.html">✍️ 생기부 NEIS 바이트 계산법과 바이트 줄이는 7가지 방법</a></li><li><a href="tools/guide/grade-5-system.html">🏅 2025 고교학점제 내신 5등급제 총정리: 비율, 적용 대상, 달라진 점</a></li><li><a href="tools/guide/grade-5-vs-9.html">⚖️ 5등급제 vs 9등급제 비교: 같은 석차면 몇 등급일까?</a></li><li><a href="tools/guide/rank-percentile.html">🔢 석차 백분율 계산법: 동석차가 있으면 어떻게 계산할까?</a></li><li><a href="tools/guide/standard-deviation.html">📊 성적표의 표준편차 읽는 법: Z점수로 내 위치 알아보기</a></li><li><a href="tools/guide/pomodoro.html">⏱️ 뽀모도로 공부법 제대로 하는 법: 25분 집중이 효과적인 이유</a></li><li><a href="tools/guide/dday-count.html">📅 디데이 계산법 총정리: 당일 포함? D-100 공부 계획 세우는 법</a></li><li><a href="tools/guide/essay-char-count.html">📝 자기소개서·과제 글자수 맞추기: 공백 포함/제외 차이와 분량 조절 팁</a></li></ul>
+    <p><a href="tools/guide/">가이드 전체 보기 →</a></p>
+  </section>
 
-				<!-- Main -->
-					<div id="main">
+  <section class="card reveal">
+    <h2>스쿨킷은 이런 곳이에요</h2>
+    <p>스쿨킷은 고등학생이 학교생활에서 자주 하는 계산을 빠르고 정확하게 할 수 있도록 만든 무료 도구 모음입니다. 생활기록부를 쓸 때 NEIS 바이트를 세고, 성적표를 받으면 내신 등급과 내 위치를 확인하고, 시험을 앞두고는 디데이와 공부 타이머로 계획을 지킬 수 있어요.</p>
+    <p>모든 계산은 이용자의 브라우저 안에서 이루어지며, 입력한 글이나 성적은 서버로 전송되지 않습니다. 각 도구의 계산 기준은 공부 가이드에서 자세히 설명하고 있어요. <a href="tools/about.html">스쿨킷 소개 더 보기</a></p>
+  </section>
 
-						<!-- One -->
-							<section id="one">
-								<div class="image main" data-position="center">
-									<img src="images/안곡.png" alt="" />
-								</div>
-								<div class="container">
-									<header class="major">
-										<h2>멘토와의 인터뷰</h2>
-										<p>데니스 홍이라는 인물과 로봇 공학자란?</a>.</p>
-															
-									</header>
-									<p>먼저 로봇 공학자란, 로봇을 설계하고, 유지하며, 다양한 일에 접목하는 전문가이다. 데니스 홍은 어린 시절부터 기계장치를 다루는 것에 많은 관심을 가지던 인물이다. 그로 인해 다양한 기계장치를 만지고 조립하였으며, 그 창작물을 친구들에게 보여주는 것을 좋아하였다. 그는 나중에 성인이 되어 고려대학교에 입학하게 되었고, 지금까지 다리가 달린 로봇, 재난 구조 로봇 등 여러 로봇들을 지금까지 만들어내고 있다.</p>
-								</div>
-							</section>
+  <div class="features">
+    <div class="card reveal"><span class="e">🔒</span><h3>개인정보 걱정 없음</h3><p>입력한 글과 성적은 서버로 전송되지 않고 내 브라우저에만 저장돼요.</p></div>
+    <div class="card reveal"><span class="e">⚡</span><h3>입력 즉시 계산</h3><p>버튼 누를 필요 없이 입력하는 순간 결과가 바로 바뀌어요.</p></div>
+    <div class="card reveal"><span class="e">📱</span><h3>폰에서도 편하게</h3><p>모바일·태블릿·PC 어디서나 똑같이 쓸 수 있어요. 다크 모드도 지원해요.</p></div>
+  </div>
 
-						<!-- Two -->
-							<section id="two">
-								<div class="container">
-									<h3>공학자가 되기 위해 해야하는 것</h3>
-									<p>공학자가 목표라면 여러가지 잘해야 하는 것이 있지만, 가장 중요한 몇 가지를 알려드리겠습니다.</p>
-									<ul class="feature-icons">
-										<li>수학,과학 열심히 하기</li>
-										<li>여러가지 컴퓨터 언어 습득하기</li>
-										<li>의사소통 능력과 팀워크 증진하기</li>
-										<li>프로젝트 및 실습 경험 쌓기</li>
-										<li>최신 AI소식 빠르게 접하기</li>
-										<li>공학 관련 학과 가기</li>
-									</ul>
-								</div>
-							</section>
-
-						<!-- Three -->
-							<section id="three">
-								<div class="container">
-									<h3>진로를 위해 노력하는 것</h3>
-									<p>다음은 제 진로를 성취하기 위해서 노력하는 것 들입니다.</p>
-									<div class="features">
-										<article>
-											<a href="#" class="image"><img src="images/samgakhamsu.png" alt="" /></a>
-											<div class="inner">
-												<h4>주요 과목 열심히 하기</h4>
-												<p>현재의 꿈을 이루기 위해서 저는 지금 현재 가장 중요하고 필요한 과목들인 수학, 과학과 같은 과목들을 열심히 공부하는 중 입니다.</p>
-											</div>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/fll.jpg" alt="" /></a>
-											<div class="inner">
-												<h4>여러가지 피지컬 컴퓨팅 대회 참가</h4>
-												<p>무슨 활동을 내가 하면 좋을까하고 고민하던 중에 피지컬 컴퓨팅에 대해서 생각해보게 되었고, 여러가지 대회들을 찾아 보던 중, 그 중 피지컬 컴퓨팅과 관련된 대회를 찾게 되었고, 친구들이랑 팀을 이뤄서 대회에 출전을 하였고, 여러가지 상도 받았습니다.</p>
-											</div>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/씨파10.png" alt="" /></a>
-											<div class="inner">
-												<h4>ai의 기초 프로그램에 대한 공부</h4>
-												<p>구글 코랩을 이용해서 이미지 구별 인공지능을 만든 프로그램 중 일부로,인공지능에 대해 공부를 하면서 관련 지식과 여러가지 프로그램들을 직접 이용해보고 있습니다. </p>
-											</div>
-										</article>
-									</div>
-								</div>
-							</section>
-
-						<!-- Four -->
-							<section id="four">
-								<div class="container">
-									<h3>힘들때 극복했던 것은?</h3>
-									<p>데니스 홍 교수님의 힘들 때 극복하셨던 방법은 크게 5가지가 있습니다.</p>
-									<ul class="feature-icons">
-										<li>실패를 '배움'으로 바꾸는 태도</li>
-										<li>도전 정신과 끈기</li>
-										<li>유머와 긍정적인 태도</li>
-										<li>주변 사람들과의 협력과 소통</li>
-										<li>자신의 목표를 사람 중심으로 둠둠</li>
-												</ul>
-											</div>
-										</div>
-									</form>
-								</div>
-							</section>
-
-						<!-- Five -->
-						<!--
-							<section id="five">
-								<div class="container">
-									<h3>Elements</h3>
-
-									<section>
-										<h4>멘<h4>
-										<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-										This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-										This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-										<hr />
-										<header>
-											<h4>Heading with a Subtitle</h4>
-											<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
-										</header>
-										<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-										<header>
-											<h5>Heading with a Subtitle</h5>
-											<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
-										</header>
-										<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-										<hr />
-										<h2>Heading Level 2</h2>
-										<h3>Heading Level 3</h3>
-										<h4>Heading Level 4</h4>
-										<h5>Heading Level 5</h5>
-										<h6>Heading Level 6</h6>
-										<hr />
-										<h5>Blockquote</h5>
-										<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-										<h5>Preformatted</h5>
-										<pre><code>i = 0;
-
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
-
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-									</section>
-
-									<section>
-										<h4>Lists</h4>
-										<div class="row">
-											<div class="col-6 col-12-xsmall">
-												<h5>Unordered</h5>
-												<ul>
-													<li>Dolor pulvinar etiam magna etiam.</li>
-													<li>Sagittis adipiscing lorem eleifend.</li>
-													<li>Felis enim feugiat dolore viverra.</li>
-												</ul>
-												<h5>Alternate</h5>
-												<ul class="alt">
-													<li>Dolor pulvinar etiam magna etiam.</li>
-													<li>Sagittis adipiscing lorem eleifend.</li>
-													<li>Felis enim feugiat dolore viverra.</li>
-												</ul>
-											</div>
-											<div class="col-6 col-12-xsmall">
-												<h5>Ordered</h5>
-												<ol>
-													<li>Dolor pulvinar etiam magna etiam.</li>
-													<li>Etiam vel felis at lorem sed viverra.</li>
-													<li>Felis enim feugiat dolore viverra.</li>
-													<li>Dolor pulvinar etiam magna etiam.</li>
-													<li>Etiam vel felis at lorem sed viverra.</li>
-													<li>Felis enim feugiat dolore viverra.</li>
-												</ol>
-												<h5>Icons</h5>
-												<ul class="icons">
-													<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-													<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-													<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-													<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-													<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-													<li><a href="#" class="icon brands fa-tumblr"><span class="label">Tumblr</span></a></li>
-												</ul>
-											</div>
-										</div>
-										<h5>Actions</h5>
-										<ul class="actions">
-											<li><a href="#" class="button primary">Default</a></li>
-											<li><a href="#" class="button">Default</a></li>
-											<li><a href="#" class="button alt">Default</a></li>
-										</ul>
-										<ul class="actions small">
-											<li><a href="#" class="button primary small">Small</a></li>
-											<li><a href="#" class="button small">Small</a></li>
-											<li><a href="#" class="button alt small">Small</a></li>
-										</ul>
-										<div class="row">
-											<div class="col-3 col-6-medium col-12-xsmall">
-												<ul class="actions stacked">
-													<li><a href="#" class="button primary">Default</a></li>
-													<li><a href="#" class="button">Default</a></li>
-													<li><a href="#" class="button alt">Default</a></li>
-												</ul>
-											</div>
-											<div class="col-3 col-6 col-12-xsmall">
-												<ul class="actions stacked">
-													<li><a href="#" class="button primary small">Small</a></li>
-													<li><a href="#" class="button small">Small</a></li>
-													<li><a href="#" class="button alt small">Small</a></li>
-												</ul>
-											</div>
-											<div class="col-3 col-6-medium col-12-xsmall">
-												<ul class="actions stacked">
-													<li><a href="#" class="button primary fit">Default</a></li>
-													<li><a href="#" class="button fit">Default</a></li>
-													<li><a href="#" class="button alt fit">Default</a></li>
-												</ul>
-											</div>
-											<div class="col-3 col-6-medium col-12-xsmall">
-												<ul class="actions stacked">
-													<li><a href="#" class="button primary small fit">Small</a></li>
-													<li><a href="#" class="button small fit">Small</a></li>
-													<li><a href="#" class="button alt small fit">Small</a></li>
-												</ul>
-											</div>
-										</div>
-									</section>
-
-									<section>
-										<h4>Table</h4>
-										<h5>Default</h5>
-										<div class="table-wrapper">
-											<table>
-												<thead>
-													<tr>
-														<th>Name</th>
-														<th>Description</th>
-														<th>Price</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>Item One</td>
-														<td>Ante turpis integer aliquet porttitor.</td>
-														<td>29.99</td>
-													</tr>
-													<tr>
-														<td>Item Two</td>
-														<td>Vis ac commodo adipiscing arcu aliquet.</td>
-														<td>19.99</td>
-													</tr>
-													<tr>
-														<td>Item Three</td>
-														<td> Morbi faucibus arcu accumsan lorem.</td>
-														<td>29.99</td>
-													</tr>
-													<tr>
-														<td>Item Four</td>
-														<td>Vitae integer tempus condimentum.</td>
-														<td>19.99</td>
-													</tr>
-													<tr>
-														<td>Item Five</td>
-														<td>Ante turpis integer aliquet porttitor.</td>
-														<td>29.99</td>
-													</tr>
-												</tbody>
-												<tfoot>
-													<tr>
-														<td colspan="2"></td>
-														<td>100.00</td>
-													</tr>
-												</tfoot>
-											</table>
-										</div>
-
-										<h5>Alternate</h5>
-										<div class="table-wrapper">
-											<table class="alt">
-												<thead>
-													<tr>
-														<th>Name</th>
-														<th>Description</th>
-														<th>Price</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>Item One</td>
-														<td>Ante turpis integer aliquet porttitor.</td>
-														<td>29.99</td>
-													</tr>
-													<tr>
-														<td>Item Two</td>
-														<td>Vis ac commodo adipiscing arcu aliquet.</td>
-														<td>19.99</td>
-													</tr>
-													<tr>
-														<td>Item Three</td>
-														<td> Morbi faucibus arcu accumsan lorem.</td>
-														<td>29.99</td>
-													</tr>
-													<tr>
-														<td>Item Four</td>
-														<td>Vitae integer tempus condimentum.</td>
-														<td>19.99</td>
-													</tr>
-													<tr>
-														<td>Item Five</td>
-														<td>Ante turpis integer aliquet porttitor.</td>
-														<td>29.99</td>
-													</tr>
-												</tbody>
-												<tfoot>
-													<tr>
-														<td colspan="2"></td>
-														<td>100.00</td>
-													</tr>
-												</tfoot>
-											</table>
-										</div>
-									</section>
-
-									<section>
-										<h4>Buttons</h4>
-										<ul class="actions">
-											<li><a href="#" class="button primary">Primary</a></li>
-											<li><a href="#" class="button">Default</a></li>
-											<li><a href="#" class="button alt">Alternate</a></li>
-										</ul>
-										<ul class="actions">
-											<li><a href="#" class="button primary large">Large</a></li>
-											<li><a href="#" class="button">Default</a></li>
-											<li><a href="#" class="button alt small">Small</a></li>
-										</ul>
-										<ul class="actions fit">
-											<li><a href="#" class="button primary fit">Fit</a></li>
-											<li><a href="#" class="button fit">Fit</a></li>
-											<li><a href="#" class="button alt fit">Fit</a></li>
-										</ul>
-										<ul class="actions fit small">
-											<li><a href="#" class="button primary fit small">Fit + Small</a></li>
-											<li><a href="#" class="button fit small">Fit + Small</a></li>
-											<li><a href="#" class="button alt fit small">Fit + Small</a></li>
-										</ul>
-										<ul class="actions">
-											<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-											<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-											<li><a href="#" class="button alt icon solid fa-check">Icon</a></li>
-										</ul>
-										<ul class="actions">
-											<li><span class="button primary disabled">Primary</span></li>
-											<li><span class="button disabled">Default</span></li>
-											<li><span class="button alt disabled">Alternate</span></li>
-										</ul>
-									</section>
-
-									<section>
-										<h4>Form</h4>
-										<form method="post" action="#">
-											<div class="row gtr-uniform">
-												<div class="col-6 col-12-xsmall">
-													<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
-												</div>
-												<div class="col-6 col-12-xsmall">
-													<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
-												</div>
-												<div class="col-12">
-													<select name="demo-category" id="demo-category">
-														<option value="">- Category -</option>
-														<option value="1">Manufacturing</option>
-														<option value="1">Shipping</option>
-														<option value="1">Administration</option>
-														<option value="1">Human Resources</option>
-													</select>
-												</div>
-												<div class="col-4 col-12-medium">
-													<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-													<label for="demo-priority-low">Low Priority</label>
-												</div>
-												<div class="col-4 col-12-medium">
-													<input type="radio" id="demo-priority-normal" name="demo-priority">
-													<label for="demo-priority-normal">Normal Priority</label>
-												</div>
-												<div class="col-4 col-12-medium">
-													<input type="radio" id="demo-priority-high" name="demo-priority">
-													<label for="demo-priority-high">High Priority</label>
-												</div>
-												<div class="col-6 col-12-medium">
-													<input type="checkbox" id="demo-copy" name="demo-copy">
-													<label for="demo-copy">Email me a copy of this message</label>
-												</div>
-												<div class="col-6 col-12-medium">
-													<input type="checkbox" id="demo-human" name="demo-human" checked>
-													<label for="demo-human">I am a human and not a robot</label>
-												</div>
-												<div class="col-12">
-													<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-												</div>
-												<div class="col-12">
-													<ul class="actions">
-														<li><input type="submit" value="Send Message" /></li>
-														<li><input type="reset" value="Reset" class="alt" /></li>
-													</ul>
-												</div>
-											</div>
-										</form>
-									</section>
-
-									<section>
-										<h4>Image</h4>
-										<h5>Fit</h5>
-										<span class="image fit"><img src="images/banner.jpg" alt="" /></span>
-										<div class="box alt">
-											<div class="row gtr-50 gtr-uniform">
-												<div class="col-4"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-											</div>
-										</div>
-										<h5>Left &amp; Right</h5>
-										<p><span class="image left"><img src="images/avatar.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-										<p><span class="image right"><img src="images/avatar.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-									</section>
-
-								</div>
-							</section>
-						-->
-
-					</div>
-
-				<!-- Footer -->
-					<section id="footer">
-						<div class="container">
-							<ul class="copyright">
-								<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="https://www.youtube.com/shorts/gx_RTFJInwU">Me</a></li>
-							</ul>
-						</div>
-					</section>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+  <div class="support" hidden></div>
+</div>
+<script>
+  (function () {
+    var words = ["생기부 쓸 때도", "자소서 쓸 때도", "시험 끝나고도", "공부할 때도", "수능 앞두고도"], i = 0, el = document.getElementById("rot");
+    setInterval(function () { i = (i + 1) % words.length; el.innerHTML = "<span>" + words[i] + "</span>"; }, 2200);
+  })();
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("[data-count]").forEach(function (el, i) {
+      setTimeout(function () { SK.countUp(el, +el.dataset.count, { suffix: el.dataset.suffix || "", duration: 1200 }); }, 300 + i * 150);
+    });
+  });
+</script>
+</body>
 </html>
-

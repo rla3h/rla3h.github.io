@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="google-adsense-account" content="ca-pub-9311904562813203" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>성적표의 표준편차 읽는 법: Z점수로 내 위치 알아보기 | 스쿨킷</title>
+  <meta name="description" content="성적표에 적힌 원점수, 과목 평균, 표준편차로 내가 상위 몇 %쯤인지 추정하는 방법을 설명합니다. Z점수의 의미와 정규분포 가정의 한계까지 고등학생 눈높이로 정리했습니다." />
+  <link rel="canonical" href="https://rla3h.github.io/tools/guide/standard-deviation.html" />
+  <meta property="og:title" content="성적표의 표준편차 읽는 법: Z점수로 내 위치 알아보기 | 스쿨킷" />
+  <meta property="og:description" content="성적표에 적힌 원점수, 과목 평균, 표준편차로 내가 상위 몇 %쯤인지 추정하는 방법을 설명합니다. Z점수의 의미와 정규분포 가정의 한계까지 고등학생 눈높이로 정리했습니다." />
+  <meta property="og:site_name" content="스쿨킷" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rla3h.github.io/tools/guide/standard-deviation.html" />
+  <meta name="theme-color" content="#4c5cf5" />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <script src="../assets/config.js"></script>
+  <script src="../assets/common.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"성적표의 표준편차 읽는 법: Z점수로 내 위치 알아보기","description":"성적표에 적힌 원점수, 과목 평균, 표준편차로 내가 상위 몇 %쯤인지 추정하는 방법을 설명합니다. Z점수의 의미와 정규분포 가정의 한계까지 고등학생 눈높이로 정리했습니다.","datePublished":"2026-10-06","dateModified":"2026-10-06","inLanguage":"ko","author":{"@type":"Organization","name":"스쿨킷"},"publisher":{"@type":"Organization","name":"스쿨킷"},"mainEntityOfPage":"https://rla3h.github.io/tools/guide/standard-deviation.html"}</script>
+</head>
+<body>
+<div class="wrap">
+  <article class="post">
+    <nav class="crumbs"><a href="../../">스쿨킷</a> › <a href="./">공부 가이드</a></nav>
+    <span class="eyebrow">📊 공부 가이드</span>
+    <h1>성적표의 표준편차 읽는 법: Z점수로 내 위치 알아보기</h1>
+    <p class="lead">성적표에 적힌 원점수, 과목 평균, 표준편차로 내가 상위 몇 %쯤인지 추정하는 방법을 설명합니다. Z점수의 의미와 정규분포 가정의 한계까지 고등학생 눈높이로 정리했습니다.</p>
+    <p class="small">스쿨킷 · 2026-10-06 업데이트</p>
+    <a class="tool-cta" href="../score.html">📊 <b>성적 위치 계산기</b> 바로 쓰기 →</a>
+    <div class="post-body">
+<p>성적표에는 원점수 옆에 <b>과목 평균</b>과 <b>표준편차</b>가 함께 적혀 있습니다. 석차가 표시되지 않는 과목이나, 등급만으로는 위치가 애매할 때 이 두 숫자를 활용하면 내 위치를 대략 짐작할 수 있습니다.</p>
+
+<h2>1. 표준편차란?</h2>
+<p>표준편차는 점수가 평균을 중심으로 <b>얼마나 퍼져 있는지</b>를 나타냅니다.</p>
+<ul>
+<li>표준편차가 <b>작다</b> → 대부분 학생의 점수가 평균 근처에 몰려 있음 (몇 점 차이로 석차가 크게 바뀜)</li>
+<li>표준편차가 <b>크다</b> → 점수가 넓게 퍼져 있음 (같은 점수 차이라도 석차 변화가 작음)</li>
+</ul>
+
+<h2>2. Z점수 구하기</h2>
+<p class="formula">Z점수 = (내 원점수 − 과목 평균) ÷ 표준편차</p>
+<p>Z점수는 "내가 평균보다 표준편차 몇 개만큼 위(또는 아래)에 있는가"를 뜻합니다. 예를 들어 원점수 85점, 평균 68.5점, 표준편차 15.2점이면 Z = (85 − 68.5) ÷ 15.2 ≈ <b>1.09</b>입니다.</p>
+
+<h2>3. Z점수로 상위 몇 %인지 추정하기</h2>
+<p>점수가 정규분포(종 모양)를 따른다고 가정하면, Z점수에 따라 대략 다음과 같은 위치가 됩니다.</p>
+<table>
+<thead><tr><th>Z점수</th><th>대략적인 위치(상위)</th></tr></thead>
+<tbody>
+<tr><td>+2.0</td><td>약 2.3%</td></tr>
+<tr><td>+1.5</td><td>약 6.7%</td></tr>
+<tr><td>+1.0</td><td>약 15.9%</td></tr>
+<tr><td>+0.5</td><td>약 30.9%</td></tr>
+<tr><td>0 (평균)</td><td>50%</td></tr>
+<tr><td>−0.5</td><td>약 69.1%</td></tr>
+<tr><td>−1.0</td><td>약 84.1%</td></tr>
+</tbody>
+</table>
+<p>위 예시(Z ≈ 1.09)라면 상위 약 14% 정도로, 5등급제 기준 2등급(상위 34% 이내), 9등급제 기준 3등급(상위 23% 이내) 정도로 추정됩니다.</p>
+
+<h2>4. 반드시 알아야 할 한계</h2>
+<ul>
+<li><b>시험이 너무 쉽거나 어려우면</b> 점수 분포가 한쪽으로 쏠려 정규분포와 달라집니다. 이때 추정 오차가 커집니다.</li>
+<li><b>수강자가 적으면</b> 분포가 들쭉날쭉해 추정이 부정확합니다.</li>
+<li>실제 등급은 <b>석차</b>로 정해집니다. 표준편차 추정은 참고용으로만 쓰세요.</li>
+</ul>
+
+<h2>5. 이렇게 활용하세요</h2>
+<ol>
+<li>과목별 Z점수를 비교하면 <b>상대적으로 약한 과목</b>을 찾을 수 있습니다. 원점수는 높아도 평균이 높은 과목이면 Z점수는 낮을 수 있습니다.</li>
+<li>다음 시험 목표를 "평균 + 표준편차 1개 이상"처럼 잡으면 상위 약 16% 안쪽을 노리는 셈입니다.</li>
+</ol>
+</div>
+    <div class="ad-slot" hidden></div>
+    <a class="tool-cta" href="../score.html">📊 직접 계산해 보기: <b>성적 위치 계산기</b> →</a>
+    <section class="card related">
+      <h2>함께 읽으면 좋은 글</h2>
+      <ul><li><a href="neis-byte.html">✍️ 생기부 NEIS 바이트 계산법과 바이트 줄이는 7가지 방법</a></li><li><a href="grade-5-system.html">🏅 2025 고교학점제 내신 5등급제 총정리: 비율, 적용 대상, 달라진 점</a></li><li><a href="grade-5-vs-9.html">⚖️ 5등급제 vs 9등급제 비교: 같은 석차면 몇 등급일까?</a></li><li><a href="rank-percentile.html">🔢 석차 백분율 계산법: 동석차가 있으면 어떻게 계산할까?</a></li></ul>
+      <p class="small"><a href="./">공부 가이드 전체 보기 →</a></p>
+    </section>
+  </article>
+  <div class="support" hidden></div>
+</div>
+</body>
+</html>
